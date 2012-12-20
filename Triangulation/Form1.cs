@@ -4,8 +4,10 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
+
+using PerlinNoiseGeneration;
+
 using Triangulation.MapObjects;
-using Triangulation.PerlinNoise;
 
 namespace Triangulation
 {
@@ -17,7 +19,8 @@ namespace Triangulation
 
         private Bitmap m_Bitmap;
 
-        private readonly Random m_Random = new Random();        
+        private readonly Random m_Random = new Random();
+        private readonly PerlinNoiseGenerator m_NoiseGenerator = new PerlinNoiseGenerator();
         private const int AddRangeCount = 50000;
 
         private const int MaxWidth = 1200;
@@ -178,7 +181,7 @@ namespace Triangulation
 
             if (checkBoxApplyNoise.Checked)
             {
-                var noise = PerlinNoiseGenerator.GenerateNoise(MaxWidth, MaxHeight, m_Random.Next(),
+                var noise = m_NoiseGenerator.GenerateNoise(MaxWidth, MaxHeight, m_Random.Next(),
                                                                Math.Max(Width, Height));
 
                 const int baseAlfa = 150;

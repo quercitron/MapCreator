@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 
-namespace Triangulation.PerlinNoise
+namespace PerlinNoiseGeneration
 {
-    public static class PerlinNoiseGenerator
+    public class PerlinNoiseGenerator
     {        
-        public static double[,] GenerateNoise(int width, int height, int seed, double frequency)
+        public double[,] GenerateNoise(int width, int height, int seed, double frequency)
         {            
             var result = new double[width,height];            
 
@@ -69,7 +69,7 @@ namespace Triangulation.PerlinNoise
             return Math.Abs(Noise2D(x, y, seed));
         }
 
-        public static double[,] GenerateNormNoise(int width, int height, int seed, int frequency)
+        public double[,] GenerateNormNoise(int width, int height, int seed, int frequency)
         {
             var result = GenerateNoise(width, height, seed, frequency);
 
@@ -78,7 +78,7 @@ namespace Triangulation.PerlinNoise
             return result;
         }
 
-        public static double[,] GeneratePolarNoise(int width, int height, int seed, int frequency)
+        public double[,] GeneratePolarNoise(int width, int height, int seed, int frequency)
         {
             var result = GenerateNoise(width, height, seed, frequency);
 

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
+using PerlinNoiseGeneration;
+
 using Triangulation.Algorithm.PriorityQueue;
 using Triangulation.MapObjects;
-using Triangulation.PerlinNoise;
 
 namespace Triangulation
 {
@@ -12,6 +14,7 @@ namespace Triangulation
         private readonly Structure m_Structure;
 
         private readonly Random m_Random = new Random();
+        private readonly PerlinNoiseGenerator m_NoiseGenerator = new PerlinNoiseGenerator();
 
         public MapFactory(Structure structure)
         {
@@ -312,7 +315,7 @@ namespace Triangulation
 
         private void PerlinNoiseLandGenerator(Map map, int seed)
         {
-            var noise = PerlinNoiseGenerator.GenerateNoise((int)map.Width, (int)map.Height, seed, 8);
+            var noise = m_NoiseGenerator.GenerateNoise((int)map.Width, (int)map.Height, seed, 8);
 
             var mapCenter = new Point2D(map.Width / 2, map.Height / 2);
 
@@ -598,7 +601,7 @@ namespace Triangulation
                 }
             }*/
 
-            var noise = PerlinNoiseGenerator.GeneratePolarNoise((int)map.Width, (int)map.Height, m_Random.Next(), 4);
+            var noise = m_NoiseGenerator.GeneratePolarNoise((int)map.Width, (int)map.Height, m_Random.Next(), 4);
 
             /*foreach (var corner in map.Corners)
             {
