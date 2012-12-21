@@ -2,13 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+using Triangulation.Algorithm.GeometryBase;
+
 namespace Triangulation.MapObjects
 {
-    public class MapBase
+    abstract internal class MapBase : IMap
     {
-        private static readonly Random Rnd = new Random();
+        private static readonly Random m_Rnd = new Random();
 
-        public MapBase(double width, double height)
+        protected MapBase(double width, double height)
         {
             Width = width;
             Height = height;
@@ -30,6 +32,8 @@ namespace Triangulation.MapObjects
             get { return Corners.Max(p => p.Elevation); }
         }
 
+        public int MaxDistanceFromEdge { get; set; }
+
         public bool ContainsPointInside(Point2D point)
         {
             return 0 <= point.X && point.X <= Width && 0 <= point.Y && point.Y <= Height;
@@ -37,12 +41,12 @@ namespace Triangulation.MapObjects
 
         public Polygon GetRandomPolygon()
         {
-            return Polygons[Rnd.Next(Polygons.Count)];
+            return Polygons[m_Rnd.Next(Polygons.Count)];
         }
 
         public Corner GetRandomCorner()
         {
-            return Corners[Rnd.Next(Corners.Count)];
+            return Corners[m_Rnd.Next(Corners.Count)];
         }
     }
 }

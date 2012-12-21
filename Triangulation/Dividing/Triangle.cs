@@ -1,7 +1,9 @@
-﻿using System.Linq;
+using System.Linq;
+
+using Triangulation.Algorithm.GeometryBase;
 using Triangulation.MapObjects;
 
-namespace Triangulation
+namespace Triangulation.Dividing
 {
     public class Triangle
     {        

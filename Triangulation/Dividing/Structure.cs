@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Windows.Forms;
 
-namespace Triangulation
+using Triangulation.Algorithm.GeometryBase;
+
+namespace Triangulation.Dividing
 {
     public class Structure
     {
@@ -180,8 +181,7 @@ namespace Triangulation
 
         private bool Ok(Point2D a, Point2D b, Point2D c, Point2D d)
         {
-            return Geometry.Vect(a, b, d) * Geometry.Scal(c, d, b) + Geometry.Vect(c, d, b) * Geometry.Scal(a, b, d) >=
-                   0;
+            return Geometry.Vect(a, b, d) * Geometry.Scal(c, d, b) + Geometry.Vect(c, d, b) * Geometry.Scal(a, b, d) >= 0;
         }
 
         private Triangle SearchTriangle(Point2D point)

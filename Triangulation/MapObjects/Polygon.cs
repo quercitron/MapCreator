@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using Triangulation.Algorithm.GeometryBase;
+
 namespace Triangulation.MapObjects
 {
     public class Polygon

@@ -1,6 +1,8 @@
-﻿using System;
+using System;
 
-namespace Triangulation
+using Triangulation.Algorithm.GeometryBase;
+
+namespace Triangulation.Dividing
 {
     public class TriangleHash
     {

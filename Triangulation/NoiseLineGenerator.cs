@@ -1,24 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Triangulation.Algorithm.GeometryBase;
+
 namespace Triangulation
 {
-    static class NoiseLineGenerator
+    internal class NoiseLineGenerator : INoiseLineGenerator
     {
-        private static readonly RandomImproved RndGen = new RandomImproved();
+        private const int K = 1;
 
-        public static List<Point2D> Generate(Point2D a, Point2D b, Point2D c, Point2D d, double minLength, bool makeSmooth)
+        private readonly RandomImproved m_RndGen = new RandomImproved();
+
+        public List<Point2D> Generate(Point2D a, Point2D b, Point2D c, Point2D d, double minLength, bool makeSmooth)
         {
             Point2D left, right;
 
             if (makeSmooth)
             {
-                const int k = 1;
-
                 var middle = (a + c) / 2;
-                var smoothMultiplier = Math.Min(1, Geometry.Dist(a, c) / Geometry.Dist(b, middle)) * k;
+                var smoothMultiplier = Math.Min(1, Geometry.Dist(a, c) / Geometry.Dist(b, middle)) * K;
                 left = middle + (b - middle) * smoothMultiplier;
-                smoothMultiplier = Math.Min(1, Geometry.Dist(a, c) / Geometry.Dist(d, middle)) * k;
+                smoothMultiplier = Math.Min(1, Geometry.Dist(a, c) / Geometry.Dist(d, middle)) * K;
                 right = middle + (d - middle) * smoothMultiplier;
             }
             else
@@ -36,7 +38,7 @@ namespace Triangulation
             return result;
         }
 
-        private static void Subdivide(Point2D a, Point2D b, Point2D c, Point2D d, double minLength, ICollection<Point2D> currentResult)
+        private void Subdivide(Point2D a, Point2D b, Point2D c, Point2D d, double minLength, ICollection<Point2D> currentResult)
         {
             if (a.Dist(c) < minLength || b.Dist(d) < minLength)
             {
@@ -44,8 +46,8 @@ namespace Triangulation
             }
 
             double k = 0.2;
-            var p = RndGen.NextDouble(k, 1 - k);
-            var q = RndGen.NextDouble(k, 1 - k);
+            var p = m_RndGen.NextDouble(k, 1 - k);
+            var q = m_RndGen.NextDouble(k, 1 - k);
 
             var e = Geometry.Interpolate(a, d, p);
             var f = Geometry.Interpolate(b, c, p);
@@ -57,10 +59,10 @@ namespace Triangulation
 
             double k2 = k / (1 - k);
 
-            var s = 1 + RndGen.NextDouble(-0.4, 0.4);
-            var t = 1 + RndGen.NextDouble(-0.4, 0.4);
-            var m = 1 + RndGen.NextDouble(-0.4, 0.4);
-            var n = 1 + RndGen.NextDouble(-0.4, 0.4);
+            var s = 1 + m_RndGen.NextDouble(-0.4, 0.4);
+            var t = 1 + m_RndGen.NextDouble(-0.4, 0.4);
+            var m = 1 + m_RndGen.NextDouble(-0.4, 0.4);
+            var n = 1 + m_RndGen.NextDouble(-0.4, 0.4);
 
             Subdivide(a, Geometry.Interpolate(g, a, s), h, Geometry.Interpolate(e, a, t), minLength, currentResult);
             currentResult.Add(h);

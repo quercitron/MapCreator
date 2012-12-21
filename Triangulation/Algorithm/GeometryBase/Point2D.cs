@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Drawing;
 
-namespace Triangulation
+namespace Triangulation.Algorithm.GeometryBase
 {
     public class Point2D
     {

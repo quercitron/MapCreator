@@ -1,6 +1,6 @@
 ﻿namespace Triangulation
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -272,7 +272,7 @@
             this.buttonSeed.UseVisualStyleBackColor = true;
             this.buttonSeed.Click += new System.EventHandler(this.ButtonSeedClick);
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -286,8 +286,8 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.buttonAddRange);
             this.Controls.Add(this.buttonAddRandomPoint);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "MainForm";
+            this.Text = "Map Creator";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

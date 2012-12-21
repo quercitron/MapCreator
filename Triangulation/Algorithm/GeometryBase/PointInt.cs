@@ -1,4 +1,4 @@
-﻿namespace Triangulation
+namespace Triangulation.Algorithm.GeometryBase
 {
     class PointInt
     {

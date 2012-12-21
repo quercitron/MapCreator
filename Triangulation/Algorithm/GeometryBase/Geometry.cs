@@ -1,10 +1,12 @@
-﻿using System;
+using System;
 
-namespace Triangulation
+using Triangulation.Dividing;
+
+namespace Triangulation.Algorithm.GeometryBase
 {
     public static class Geometry
     {
-        private static readonly Random Rnd = new Random();
+        private static readonly Random m_Rnd = new Random();
 
         public static double Scal(Point2D a, Point2D b, Point2D c)
         {
@@ -43,8 +45,8 @@ namespace Triangulation
       
         public static Point2D GetRandomUnitVector()
         {
-            double x = Rnd.NextDouble() - 0.5;
-            double y = Rnd.NextDouble() - 0.5;
+            double x = m_Rnd.NextDouble() - 0.5;
+            double y = m_Rnd.NextDouble() - 0.5;
             return new Point2D(x, y) / Math.Sqrt(x * x + y * y);
         }
     }

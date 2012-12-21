@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+﻿using System.Drawing;
 
 namespace Triangulation
 {
@@ -47,6 +43,11 @@ namespace Triangulation
         public static explicit operator Color(MyColor a)
         {
             return Color.FromArgb((int) a.A, (int) a.R, (int) a.G, (int) a.B);
+        }
+
+        public static explicit operator MyColor(Color a)
+        {
+            return new MyColor(a);
         }
     }
 }

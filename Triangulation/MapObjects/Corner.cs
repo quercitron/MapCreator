@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 
+using Triangulation.Algorithm.GeometryBase;
+
 namespace Triangulation.MapObjects
 {
     public class Corner : Point2D
