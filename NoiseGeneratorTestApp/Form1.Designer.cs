@@ -32,6 +32,7 @@
             this.buttonNextRandom = new System.Windows.Forms.Button();
             this.buttonGenerate = new System.Windows.Forms.Button();
             this.textBoxFrequency = new System.Windows.Forms.TextBox();
+            this.buttonTestSort = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBoxSeed
@@ -72,11 +73,23 @@
             this.textBoxFrequency.Text = "10";
             this.textBoxFrequency.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
+            // buttonTestSort
+            // 
+            this.buttonTestSort.Cursor = System.Windows.Forms.Cursors.Default;
+            this.buttonTestSort.Location = new System.Drawing.Point(897, 12);
+            this.buttonTestSort.Name = "buttonTestSort";
+            this.buttonTestSort.Size = new System.Drawing.Size(75, 23);
+            this.buttonTestSort.TabIndex = 4;
+            this.buttonTestSort.Text = "Test Sort";
+            this.buttonTestSort.UseVisualStyleBackColor = true;
+            this.buttonTestSort.Click += new System.EventHandler(this.buttonTestSort_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 712);
+            this.Controls.Add(this.buttonTestSort);
             this.Controls.Add(this.textBoxFrequency);
             this.Controls.Add(this.buttonGenerate);
             this.Controls.Add(this.buttonNextRandom);
@@ -95,6 +108,7 @@
         private System.Windows.Forms.Button buttonNextRandom;
         private System.Windows.Forms.Button buttonGenerate;
         private System.Windows.Forms.TextBox textBoxFrequency;
+        private System.Windows.Forms.Button buttonTestSort;
     }
 }
 

@@ -47,9 +47,11 @@
             this.buttonRedraw = new System.Windows.Forms.Button();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.buttonSeed = new System.Windows.Forms.Button();
+            this.nudAddCount = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudAddCount)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonAddRandomPoint
@@ -68,9 +70,9 @@
             // 
             this.buttonAddRange.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonAddRange.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonAddRange.Location = new System.Drawing.Point(1272, 63);
+            this.buttonAddRange.Location = new System.Drawing.Point(1354, 63);
             this.buttonAddRange.Name = "buttonAddRange";
-            this.buttonAddRange.Size = new System.Drawing.Size(180, 45);
+            this.buttonAddRange.Size = new System.Drawing.Size(98, 45);
             this.buttonAddRange.TabIndex = 1;
             this.buttonAddRange.Text = "Add Range";
             this.buttonAddRange.UseVisualStyleBackColor = true;
@@ -257,26 +259,45 @@
             0,
             0});
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(84, 20);
+            this.numericUpDown1.Size = new System.Drawing.Size(76, 20);
             this.numericUpDown1.TabIndex = 7;
             // 
             // buttonSeed
             // 
             this.buttonSeed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonSeed.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonSeed.Location = new System.Drawing.Point(1362, 114);
+            this.buttonSeed.Location = new System.Drawing.Point(1354, 114);
             this.buttonSeed.Name = "buttonSeed";
-            this.buttonSeed.Size = new System.Drawing.Size(90, 45);
+            this.buttonSeed.Size = new System.Drawing.Size(98, 45);
             this.buttonSeed.TabIndex = 8;
             this.buttonSeed.Text = "Seed";
             this.buttonSeed.UseVisualStyleBackColor = true;
             this.buttonSeed.Click += new System.EventHandler(this.ButtonSeedClick);
+            // 
+            // nudAddCount
+            // 
+            this.nudAddCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudAddCount.Location = new System.Drawing.Point(1272, 78);
+            this.nudAddCount.Maximum = new decimal(new int[] {
+            2000000000,
+            0,
+            0,
+            0});
+            this.nudAddCount.Name = "nudAddCount";
+            this.nudAddCount.Size = new System.Drawing.Size(76, 20);
+            this.nudAddCount.TabIndex = 9;
+            this.nudAddCount.Value = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1464, 1054);
+            this.Controls.Add(this.nudAddCount);
             this.Controls.Add(this.buttonSeed);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.buttonRedraw);
@@ -293,6 +314,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudAddCount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -319,6 +341,7 @@
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Button buttonSeed;
         private System.Windows.Forms.CheckBox checkBoxShowRivers;
+        private System.Windows.Forms.NumericUpDown nudAddCount;
     }
 }
 

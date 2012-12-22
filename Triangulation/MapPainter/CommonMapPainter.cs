@@ -49,7 +49,7 @@ namespace Triangulation.MapPainter
                         if (polygon.IsOceanCoast && settings.DisplayCoast)
                         {
                             graphics.FillPolygon(coastBrush, polygon.CornersToDraw.Select(p => (PointF)p).ToArray());
-                            graphics.FillPolygon(coastBrush, polygon.CornersToDraw.Select(p => (PointF)p).Reverse().ToArray());
+                            //graphics.FillPolygon(coastBrush, polygon.CornersToDraw.Select(p => (PointF)p).Reverse().ToArray());
                         }
                         else
                         {
@@ -66,7 +66,7 @@ namespace Triangulation.MapPainter
                             else
                             {
                                 graphics.FillPolygon(landBrush, polygon.CornersToDraw.Select(p => (PointF)p).Reverse().ToArray());
-                                graphics.FillPolygon(landBrush, polygon.CornersToDraw.Select(p => (PointF)p).ToArray());
+                                //graphics.FillPolygon(landBrush, polygon.CornersToDraw.Select(p => (PointF)p).ToArray());
                             }
                         }
                     }
@@ -81,6 +81,13 @@ namespace Triangulation.MapPainter
                             graphics.FillPolygon(lakeBrush, polygon.CornersToDraw.Select(p => (PointF)p).ToArray());
                         }
                     }
+
+                    /*graphics.FillEllipse(new SolidBrush(Color.Red), (float) polygon.Center.X, (float) polygon.Center.Y, 5, 5);
+
+                    for (int i = 0; i < polygon.Borders.Count - 2; i++)
+                    {
+                        graphics.DrawLine(new Pen(Color.Green), (PointF) polygon.Borders[i].Center, (PointF) polygon.Borders[i + 1].Center);
+                    }*/
                 }
             }
 

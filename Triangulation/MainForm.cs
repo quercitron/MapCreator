@@ -23,7 +23,7 @@ namespace Triangulation
         private Bitmap m_Bitmap;
 
         private readonly Random m_Random = new Random();
-        private const int AddRangeCount = 100;
+        private const int AddRangeCount = 10;
 
         private const int MaxWidth = 1200;
         private const int MaxHeight = 900;
@@ -135,7 +135,7 @@ namespace Triangulation
 
         private void ButtonAddRangeClick(object sender, EventArgs e)
         {
-            AddRangeOfPoints(AddRangeCount);
+            AddRangeOfPoints((int) nudAddCount.Value);
         }
 
         private void AddRangeOfPoints(int total)

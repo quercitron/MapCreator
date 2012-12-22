@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 using Triangulation.Algorithm.GeometryBase;
+using Triangulation.Algorithm.Sorting;
 using Triangulation.Dividing;
 using Triangulation.MapObjects;
 
@@ -52,6 +54,12 @@ namespace Triangulation.MapBuilding
                     {
                         triangle.Corner.Corners[i] = current.Corner;
 
+                        // TODO: Remove check
+                        if (triangle.Id == current.Id)
+                        {
+                            throw new InvalidDataException("Ids are equal");
+                        }
+
                         if (triangle.Id < current.Id)
                         {
                             var border = new Border();
@@ -85,8 +93,8 @@ namespace Triangulation.MapBuilding
             foreach (Polygon polygon in map.Polygons)
             {
                 Point2D center = polygon.Center;
-                polygon.Corners.Sort((a, b) => Geometry.Vect(center, a, b).CompareTo(0));
-                polygon.Borders.Sort((a, b) => Geometry.Vect(center, a.Center, b.Center).CompareTo(0));
+                polygon.Corners.QuickSort((a, b) => Geometry.Vect(center, a, b).CompareTo(0));
+                polygon.Borders.QuickSort((a, b) => Geometry.Vect(center, a.Center, b.Center).CompareTo(0));
                 polygon.IsInside = polygon.Corners.All(map.ContainsPointInside);
             }
 
@@ -94,9 +102,9 @@ namespace Triangulation.MapBuilding
             {
                 foreach (var border in polygon.Borders.Where(b => !b.BorderToDrawCreated))
                 {
-                    /*var points = m_NoiseLineGenerator.Generate(border.Corners[0], border.Polygons[0].BasePoint,
-                                                             border.Corners[1], border.Polygons[1].BasePoint, 2, true);*/
-                    var points = new List<Point2D> { border.Corners[0], border.Corners[1] };
+                    var points = m_NoiseLineGenerator.Generate(border.Corners[0], border.Polygons[0].BasePoint,
+                                                             border.Corners[1], border.Polygons[1].BasePoint, 2, true);
+                    /*var points = new List<Point2D> { border.Corners[0], border.Corners[1] };*/
                     /*border.Polygons[0].CornersToDraw.AddRange(points);
                     border.Polygons[1].CornersToDraw.AddRange(points);*/
                     border.BorderToDraw = points;

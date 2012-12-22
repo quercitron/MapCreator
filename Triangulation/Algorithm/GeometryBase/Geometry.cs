@@ -49,5 +49,13 @@ namespace Triangulation.Algorithm.GeometryBase
             double y = m_Rnd.NextDouble() - 0.5;
             return new Point2D(x, y) / Math.Sqrt(x * x + y * y);
         }
+
+        // TODO: Finish
+        public static bool SegmentsIntersects(Point2D a, Point2D b, Point2D c, Point2D d)
+        {
+            bool intersect1 = (Vect(a, b, c) * Vect(a, b, d) < 0);
+            bool intersect2 = (Vect(c, d, a) * Vect(c, d, b) < 0);
+            return intersect1 && intersect2;
+        }
     }
 }
