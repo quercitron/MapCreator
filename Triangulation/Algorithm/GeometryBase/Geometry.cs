@@ -57,5 +57,12 @@ namespace Triangulation.Algorithm.GeometryBase
             bool intersect2 = (Vect(c, d, a) * Vect(c, d, b) < 0);
             return intersect1 && intersect2;
         }
+
+        public static double SpecificDist(Point2D center, Point2D p, double width, double height)
+        {
+            double dx = (p.X - center.X) / (width / 2);
+            double dy = (p.Y - center.Y) / (height / 2);
+            return Math.Sqrt(dx*dx + dy*dy);
+        }
     }
 }

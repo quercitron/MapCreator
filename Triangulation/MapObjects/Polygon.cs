@@ -63,5 +63,7 @@ namespace Triangulation.MapObjects
         {
             get { return IsOcean || IsLake; }          
         }
+
+        public TerrainType Type { get; set; }
     }
 }

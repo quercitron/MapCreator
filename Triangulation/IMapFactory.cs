@@ -2,8 +2,8 @@ using Triangulation.MapObjects;
 
 namespace Triangulation
 {
-    public interface IMapFactory
+    internal interface IMapFactory
     {
-        IMap CreateMap(int seed);
+        IMap CreateMap(int seed, MapSettings settings);
     }
 }

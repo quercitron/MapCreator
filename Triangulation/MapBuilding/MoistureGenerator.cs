@@ -6,29 +6,22 @@ using Triangulation.MapObjects;
 
 namespace Triangulation.MapBuilding
 {
-    internal class CalculateMoistureBuilderComponent : IMapBuilderComponent
+    internal class MoistureGenerator : IMapBuilderComponent
     {
-        public void Build(IMap map)
+        public void Build(IMap map, MapSettings settings)
         {
             var queue = new PriorityQueue<Corner>((a, b) => -a.DistanceForMoisture.CompareTo(b.DistanceForMoisture));
 
             foreach (var corner in map.Corners)
             {
-                if (corner.IsLake || corner.IsRiver)
+                if (corner.IsLake || corner.IsRiver || corner.IsOcean)
                 {
                     corner.DistanceForMoisture = 0;
                     queue.Enqueue(corner);
                 }
                 else
                 {
-                    if (corner.IsOcean)
-                    {
-                        corner.DistanceForMoisture = 1e9;
-                    }
-                    else
-                    {
-                        corner.DistanceForMoisture = 1e9;
-                    }
+                    corner.DistanceForMoisture = 1e9;
                 }
             }
 

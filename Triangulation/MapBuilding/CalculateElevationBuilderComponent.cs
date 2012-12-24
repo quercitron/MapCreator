@@ -24,7 +24,7 @@ namespace Triangulation.MapBuilding
         // TODO: Change random
         private Random m_Random = new Random();
 
-        public void Build(IMap map)
+        public void Build(IMap map, MapSettings settings)
         {
             Comparison<Corner> comparison = (a, b) => -a.Elevation.CompareTo(b.Elevation);
             var queue = new PriorityQueue<Corner>(comparison);

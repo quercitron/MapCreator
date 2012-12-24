@@ -7,7 +7,7 @@ namespace Triangulation.MapBuilding
 {
     internal class CalculateDistanceFromEdgeBuilderComponent : IMapBuilderComponent
     {
-        public void Build(IMap map)
+        public void Build(IMap map, MapSettings settings)
         {
             var queue = new Queue<Polygon>();
             foreach (var polygon in map.Polygons)

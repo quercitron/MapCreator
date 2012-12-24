@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -19,6 +20,7 @@ namespace Triangulation
         private Structure m_Structure;
 
         private IMap m_Map;
+        private MapSettings m_DefaultSettings;
 
         private Bitmap m_Bitmap;
 
@@ -68,6 +70,10 @@ namespace Triangulation
 
         private void InitMap()
         {
+            m_DefaultSettings = new MapSettings
+                {
+                    LandPart = 0.4
+                };
             CreateNewStructure();
 
             DrawMap();
@@ -79,7 +85,7 @@ namespace Triangulation
             m_Structure = new Structure(MaxWidth, MaxHeight);
 
             var mapFactory = new MapFactory(m_Structure);
-            m_Map = mapFactory.CreateMap((int)numericUpDown1.Value);
+            m_Map = mapFactory.CreateMap((int)numericUpDownSeed.Value, m_DefaultSettings);
 
             m_Structure.StructureChanged += OnStrucureChanged;
         }
@@ -87,7 +93,7 @@ namespace Triangulation
         private void OnStrucureChanged(object sender, EventArgs e)
         {
             var mapFactory = new MapFactory(m_Structure);
-            m_Map = mapFactory.CreateMap((int)numericUpDown1.Value);
+            m_Map = mapFactory.CreateMap((int)numericUpDownSeed.Value, m_DefaultSettings);
 
             RedrawMap(sender, e);
         }
@@ -179,7 +185,39 @@ namespace Triangulation
 
         private void ButtonSeedClick(object sender, EventArgs e)
         {
-            numericUpDown1.Value = m_Random.Next((int) numericUpDown1.Maximum);
+            numericUpDownSeed.Value = m_Random.Next((int) numericUpDownSeed.Maximum);
+        }
+
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            SaveMapImage();
+        }
+
+        private void SaveMapImage()
+        {
+            var dirPath = "Images";
+
+            if (!Directory.Exists(dirPath))
+            {
+                Directory.CreateDirectory(dirPath);
+            }
+
+            var imageName = string.Format("Map_{0}x{1}_{2}", m_Map.Width, m_Map.Height, numericUpDownSeed.Value);
+
+            if (File.Exists(Path.Combine(dirPath, imageName + ".bmp")))
+            {
+                for (int i = 2;; i++)
+                {
+                    var newImageName = string.Format("{0}_{1}", imageName, i);
+                    if (!File.Exists(Path.Combine(dirPath, newImageName + ".bmp")))
+                    {
+                        imageName = newImageName;
+                        break;
+                    }
+                }
+            }
+
+            m_Bitmap.Save(Path.Combine(dirPath, imageName + ".bmp"));
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Triangulation.MapBuilding
 {
     internal class AssignCoastBuilderComponent : IMapBuilderComponent
     {
-        public void Build(IMap map)
+        public void Build(IMap map, MapSettings settings)
         {
             foreach (var border in map.Borders)
             {

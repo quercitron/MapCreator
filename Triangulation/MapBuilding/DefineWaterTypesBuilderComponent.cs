@@ -7,7 +7,7 @@ namespace Triangulation.MapBuilding
 {
     internal class DefineWaterTypesBuilderComponent : IMapBuilderComponent
     {
-        public void Build(IMap map)
+        public void Build(IMap map, MapSettings settings)
         {
             foreach (var polygon in map.Polygons)
             {

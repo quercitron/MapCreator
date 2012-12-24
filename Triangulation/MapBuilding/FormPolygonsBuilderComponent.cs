@@ -21,7 +21,7 @@ namespace Triangulation.MapBuilding
 
         private readonly INoiseLineGenerator m_NoiseLineGenerator;
 
-        public void Build(IMap map)
+        public void Build(IMap map, MapSettings settings)
         {
             foreach (StructurePoint point in m_Structure.Points)
             {

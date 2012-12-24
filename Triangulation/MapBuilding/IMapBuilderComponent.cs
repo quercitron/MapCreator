@@ -4,6 +4,6 @@ namespace Triangulation.MapBuilding
 {
     internal interface IMapBuilderComponent
     {
-        void Build(IMap map);
+        void Build(IMap map, MapSettings settings);
     }
 }

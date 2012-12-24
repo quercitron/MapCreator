@@ -2,11 +2,12 @@
 
 using Triangulation.Dividing;
 using Triangulation.MapBuilding;
+using Triangulation.MapBuilding.LandGenerators;
 using Triangulation.MapObjects;
 
 namespace Triangulation
 {
-    public class MapFactory : IMapFactory
+    internal class MapFactory : IMapFactory
     {
         private readonly Structure m_Structure;
 
@@ -15,25 +16,27 @@ namespace Triangulation
             m_Structure = structure;
         }
 
-        public IMap CreateMap(int seed)
+        public IMap CreateMap(int seed, MapSettings settings)
         {
             var map = new Map(m_Structure.Width, m_Structure.Height);
 
-            new FormPolygonsBuilderComponent(m_Structure, new NoiseLineGenerator()).Build(map);
+            new FormPolygonsBuilderComponent(m_Structure, new NoiseLineGenerator()).Build(map, settings);
 
-            new CalculateDistanceFromEdgeBuilderComponent().Build(map);
+            new CalculateDistanceFromEdgeBuilderComponent().Build(map, settings);
 
-            new PerlinNoiseLandGeneratorBuilderComponent(seed, new PerlinNoiseGenerator()).Build(map);
+            new PerlinNoiseLandGenerator(seed, new PerlinNoiseGenerator()).Build(map, settings);
 
-            new DefineWaterTypesBuilderComponent().Build(map);
+            new DefineWaterTypesBuilderComponent().Build(map, settings);
 
-            new AssignCoastBuilderComponent().Build(map);
+            new AssignCoastBuilderComponent().Build(map, settings);
 
-            new CalculateElevationBuilderComponent(new PerlinNoiseGenerator()).Build(map);
+            new CalculateElevationBuilderComponent(new PerlinNoiseGenerator()).Build(map, settings);
 
-            new AddRiversBuilderComponent().Build(map);
+            new AddRiversBuilderComponent().Build(map, settings);
 
-            new CalculateMoistureBuilderComponent().Build(map);
+            new MoistureGenerator().Build(map, settings);
+
+            new SetTerranType().Build(map, settings);
 
             return map;
         }

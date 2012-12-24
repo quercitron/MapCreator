@@ -45,12 +45,13 @@
             this.buttonReset = new System.Windows.Forms.Button();
             this.checkBoxShowTimes = new System.Windows.Forms.CheckBox();
             this.buttonRedraw = new System.Windows.Forms.Button();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownSeed = new System.Windows.Forms.NumericUpDown();
             this.buttonSeed = new System.Windows.Forms.Button();
             this.nudAddCount = new System.Windows.Forms.NumericUpDown();
+            this.buttonSave = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAddCount)).BeginInit();
             this.SuspendLayout();
             // 
@@ -249,18 +250,18 @@
             this.buttonRedraw.UseVisualStyleBackColor = true;
             this.buttonRedraw.Click += new System.EventHandler(this.ButtonRedrawClick);
             // 
-            // numericUpDown1
+            // numericUpDownSeed
             // 
-            this.numericUpDown1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDown1.Location = new System.Drawing.Point(1272, 129);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.numericUpDownSeed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericUpDownSeed.Location = new System.Drawing.Point(1272, 129);
+            this.numericUpDownSeed.Maximum = new decimal(new int[] {
             2000000000,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(76, 20);
-            this.numericUpDown1.TabIndex = 7;
+            this.numericUpDownSeed.Name = "numericUpDownSeed";
+            this.numericUpDownSeed.Size = new System.Drawing.Size(76, 20);
+            this.numericUpDownSeed.TabIndex = 7;
             // 
             // buttonSeed
             // 
@@ -292,14 +293,27 @@
             0,
             0});
             // 
+            // buttonSave
+            // 
+            this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSave.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonSave.Location = new System.Drawing.Point(1272, 549);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(180, 45);
+            this.buttonSave.TabIndex = 10;
+            this.buttonSave.Text = "Save Map";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1464, 1054);
+            this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.nudAddCount);
             this.Controls.Add(this.buttonSeed);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.numericUpDownSeed);
             this.Controls.Add(this.buttonRedraw);
             this.Controls.Add(this.checkBoxShowTimes);
             this.Controls.Add(this.buttonReset);
@@ -313,7 +327,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAddCount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -338,10 +352,11 @@
         private System.Windows.Forms.CheckBox checkBoxCoast;
         private System.Windows.Forms.CheckBox checkBoxElevation;
         private System.Windows.Forms.Button buttonRedraw;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown numericUpDownSeed;
         private System.Windows.Forms.Button buttonSeed;
         private System.Windows.Forms.CheckBox checkBoxShowRivers;
         private System.Windows.Forms.NumericUpDown nudAddCount;
+        private System.Windows.Forms.Button buttonSave;
     }
 }
 

@@ -1,17 +1,18 @@
-﻿using PerlinNoiseGeneration;
-
+using PerlinNoiseGeneration;
 using Triangulation.Algorithm.GeometryBase;
 using Triangulation.MapObjects;
 
-namespace Triangulation.MapBuilding
+namespace Triangulation.MapBuilding.LandGenerators
 {
-    internal class PerlinNoiseLandGeneratorBuilderComponent : IMapBuilderComponent
+    internal class PerlinNoiseLandGenerator : IMapBuilderComponent
     {
         private readonly double K = 0.4;
 
         private readonly double BaseK = 0.45;
 
-        public PerlinNoiseLandGeneratorBuilderComponent(int seed, PerlinNoiseGenerator noiseGenerator)
+        private readonly int NoiseFrequency = 8;
+
+        public PerlinNoiseLandGenerator(int seed, PerlinNoiseGenerator noiseGenerator)
         {
             m_NoiseGenerator = noiseGenerator;
             this.Seed = seed;
@@ -19,18 +20,18 @@ namespace Triangulation.MapBuilding
 
         public int Seed { get; set; }
 
-        private PerlinNoiseGenerator m_NoiseGenerator;
+        private readonly PerlinNoiseGenerator m_NoiseGenerator;
 
-        public void Build(IMap map)
+        public void Build(IMap map, MapSettings settings)
         {
-            var noise = m_NoiseGenerator.GenerateNoise((int)map.Width, (int)map.Height, Seed, 8);
+            var noise = m_NoiseGenerator.GenerateNoise((int)map.Width, (int)map.Height, Seed, NoiseFrequency);
 
             var mapCenter = new Point2D(map.Width / 2, map.Height / 2);
 
             double l = 0;
-            double r = 100000;
+            double r = 2;
 
-            while (r - l > 1e-5)
+            while (r - l > 1e-8)
             {
                 double m = (l + r) / 2;
                 int count = 0;
@@ -38,7 +39,7 @@ namespace Triangulation.MapBuilding
                 {
                     var center = polygon.Center;
 
-                    var dist = center.Dist(mapCenter);
+                    var dist = Geometry.SpecificDist(mapCenter, center, map.Width, map.Height);
 
                     if (polygon.IsInside && map.ContainsPointInside(center))
                     {
@@ -65,7 +66,7 @@ namespace Triangulation.MapBuilding
             {
                 var center = polygon.Center;
 
-                var dist = center.Dist(mapCenter);
+                var dist = Geometry.SpecificDist(mapCenter, center, map.Width, map.Height);
 
                 if (polygon.IsInside && map.ContainsPointInside(center))
                 {

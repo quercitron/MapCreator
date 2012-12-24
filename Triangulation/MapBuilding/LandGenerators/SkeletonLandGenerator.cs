@@ -1,18 +1,22 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using Triangulation.Algorithm.GeometryBase;
 using Triangulation.MapObjects;
 
-namespace Triangulation.MapBuilding
+namespace Triangulation.MapBuilding.LandGenerators
 {
-    internal class SkeletonLandGeneratorBuilderComponent : IMapBuilderComponent
+    internal class SkeletonLandGenerator : IMapBuilderComponent
     {
-        // Change random
-        private readonly Random m_Random = new Random();
+        public SkeletonLandGenerator(int seed)
+        {
+            m_Random = new Random(seed);
+        }
 
-        public void Build(IMap map)
+        // Change random
+        private readonly Random m_Random;
+
+        public void Build(IMap map, MapSettings settings)
         {
             AddIslands(map);
         }

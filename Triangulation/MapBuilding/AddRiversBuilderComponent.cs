@@ -8,7 +8,7 @@ namespace Triangulation.MapBuilding
     {
         private readonly double AreaPart = 0.1;
 
-        public void Build(IMap map)
+        public void Build(IMap map, MapSettings settings)
         {
             var minStreamHeight = GetMinStreamHeight(map, AreaPart);
 

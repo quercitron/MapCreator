@@ -65,7 +65,8 @@ namespace Triangulation.MapPainter
                             }
                             else
                             {
-                                graphics.FillPolygon(landBrush, polygon.CornersToDraw.Select(p => (PointF)p).Reverse().ToArray());
+                                var brush = new SolidBrush(m_Palette.GetPolygonColor(polygon));
+                                graphics.FillPolygon(brush, polygon.CornersToDraw.Select(p => (PointF)p).Reverse().ToArray());
                                 //graphics.FillPolygon(landBrush, polygon.CornersToDraw.Select(p => (PointF)p).ToArray());
                             }
                         }
