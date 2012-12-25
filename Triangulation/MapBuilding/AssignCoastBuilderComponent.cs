@@ -33,13 +33,7 @@ namespace Triangulation.MapBuilding
                 }
             }
 
-            foreach (var corner in map.Corners)
-            {
-                corner.IsLand = corner.Polygons.Any(p => p.IsLand);
-                corner.IsWater = corner.Polygons.Any(p => !p.IsLand);
-                corner.IsOcean = corner.Polygons.Any(p => p.IsOcean);
-            }
-
+            // TODO: Strange dependancy with IsWater
             foreach (var corner in map.Corners)
             {
                 if (corner.IsWater && !corner.IsOcean)

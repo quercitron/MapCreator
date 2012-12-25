@@ -55,7 +55,17 @@ namespace Triangulation.MapObjects
         public bool InSkeleton { get; set; }
         public int DistanceFromSkeleton { get; set; }
 
-        public double Elevation { get; set; }
+        public double Elevation
+        {
+            get
+            {
+                if (Corners.Count == 0)
+                {
+                    return 0;
+                }
+                return Corners.Average(c => c.Elevation);
+            }
+        }
 
         public double DistanceForMoisture { get; set; }
 
@@ -65,5 +75,7 @@ namespace Triangulation.MapObjects
         }
 
         public TerrainType Type { get; set; }
+
+        public double Moisture { get; set; }
     }
 }

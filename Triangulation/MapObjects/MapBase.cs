@@ -27,7 +27,7 @@ namespace Triangulation.MapObjects
         public double Width { get; private set; }
         public double Height { get; private set; }
 
-        public double GetMaxElevation
+        public double GetMaxCornerElevation
         {
             get { return Corners.Max(p => p.Elevation); }
         }

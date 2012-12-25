@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -9,9 +9,9 @@ using Triangulation.MapObjects;
 
 namespace Triangulation.MapBuilding
 {
-    internal class FormPolygonsBuilderComponent : IMapBuilderComponent
+    internal class FormPolygons : IMapBuilderComponent
     {
-        public FormPolygonsBuilderComponent(Structure structure, INoiseLineGenerator noiseLineGenerator)
+        public FormPolygons(Structure structure, INoiseLineGenerator noiseLineGenerator)
         {
             this.m_Structure = structure;
             m_NoiseLineGenerator = noiseLineGenerator;

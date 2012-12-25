@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Triangulation</RootNamespace>
     <AssemblyName>Triangulation</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -71,18 +71,21 @@
     <Compile Include="Dividing\Edge.cs" />
     <Compile Include="IMapFactory.cs" />
     <Compile Include="INoiseLineGenerator.cs" />
-    <Compile Include="MapBuilding\AddRiversBuilderComponent.cs" />
     <Compile Include="MapBuilding\AssignCoastBuilderComponent.cs" />
     <Compile Include="MapBuilding\CalculateDistanceFromEdgeBuilderComponent.cs" />
-    <Compile Include="MapBuilding\CalculateElevationBuilderComponent.cs" />
-    <Compile Include="MapBuilding\MoistureGenerator.cs" />
-    <Compile Include="MapBuilding\DefineWaterTypesBuilderComponent.cs" />
-    <Compile Include="MapBuilding\FormPolygonsBuilderComponent.cs" />
+    <Compile Include="MapBuilding\Elevation\BaseElevationGenerator.cs" />
+    <Compile Include="MapBuilding\Elevation\DistanceFromWaterElevation.cs" />
+    <Compile Include="MapBuilding\DefineOcean.cs" />
+    <Compile Include="MapBuilding\Elevation\PerlinNoiseElevation.cs" />
     <Compile Include="MapBuilding\IMapBuilderComponent.cs" />
     <Compile Include="MapBuilding\LandGenerators\ImprovedPerlinNoiseLandGenerator.cs" />
     <Compile Include="MapBuilding\LandGenerators\PerlinNoiseLandGenerator.cs" />
     <Compile Include="MapBuilding\LandGenerators\SkeletonLandGenerator.cs" />
-    <Compile Include="MapBuilding\SetTerranType.cs" />
+    <Compile Include="MapBuilding\Moisture\MoistureGenerator.cs" />
+    <Compile Include="MapBuilding\Polygons\FormPolygons.cs" />
+    <Compile Include="MapBuilding\Rivers\AddRiversBuilderComponent.cs" />
+    <Compile Include="MapBuilding\Rivers\BaseRivers.cs" />
+    <Compile Include="MapBuilding\TerranType\SetTerranTypeFromSite.cs" />
     <Compile Include="MapObjects\IMap.cs" />
     <Compile Include="MapObjects\MapBase.cs" />
     <Compile Include="MapObjects\MapSettings.cs" />

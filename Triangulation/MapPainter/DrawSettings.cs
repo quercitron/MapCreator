@@ -9,5 +9,7 @@
         public bool DisplayLinealBorders { get; set; }
         public bool DisplayNoiseBorders { get; set; }
         public bool ApplyNoise { get; set; }
+
+        public bool DisplayLakes { get; set; }
     }
 }

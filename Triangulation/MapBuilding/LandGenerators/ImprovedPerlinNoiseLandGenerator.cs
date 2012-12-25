@@ -1,27 +1,29 @@
 ﻿using System;
+
 using PerlinNoiseGeneration;
+
 using Triangulation.Algorithm.GeometryBase;
 using Triangulation.MapObjects;
 
-namespace Triangulation.MapBuilding.LandGenerators
+namespace Triangulation.MapBuilding
 {
     class ImprovedPerlinNoiseLandGenerator : IMapBuilderComponent
     {
-        public ImprovedPerlinNoiseLandGenerator(int seed, PerlinNoiseGenerator noiseGenerator)
+        public ImprovedPerlinNoiseLandGenerator(int seed, PerlinNoiseGenerator perlinNoiseGenerator)
         {
-            m_NoiseGenerator = noiseGenerator;
+            this.m_PerlinNoiseGenerator = perlinNoiseGenerator;
             Seed = seed;
         }
 
         public int Seed { get; set; }
 
-        private readonly PerlinNoiseGenerator m_NoiseGenerator;
+        private readonly PerlinNoiseGenerator m_PerlinNoiseGenerator;
 
         private readonly double m_Indent = 0.3;
 
         public void Build(IMap map, MapSettings settings)
         {
-            var noise = m_NoiseGenerator.GenerateNoise((int) map.Width, (int) map.Height, Seed, 8);
+            var noise = this.m_PerlinNoiseGenerator.GenerateNoise((int) map.Width, (int) map.Height, Seed, 8);
 
             CreateIndent(noise, map.Width, map.Height, m_Indent);
 

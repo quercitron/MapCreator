@@ -1,8 +1,9 @@
 using PerlinNoiseGeneration;
+
 using Triangulation.Algorithm.GeometryBase;
 using Triangulation.MapObjects;
 
-namespace Triangulation.MapBuilding.LandGenerators
+namespace Triangulation.MapBuilding
 {
     internal class PerlinNoiseLandGenerator : IMapBuilderComponent
     {
@@ -12,19 +13,19 @@ namespace Triangulation.MapBuilding.LandGenerators
 
         private readonly int NoiseFrequency = 8;
 
-        public PerlinNoiseLandGenerator(int seed, PerlinNoiseGenerator noiseGenerator)
+        public PerlinNoiseLandGenerator(int seed, PerlinNoiseGenerator perlinNoiseGenerator)
         {
-            m_NoiseGenerator = noiseGenerator;
+            this.m_PerlinNoiseGenerator = perlinNoiseGenerator;
             this.Seed = seed;
         }
 
         public int Seed { get; set; }
 
-        private readonly PerlinNoiseGenerator m_NoiseGenerator;
+        private readonly PerlinNoiseGenerator m_PerlinNoiseGenerator;
 
         public void Build(IMap map, MapSettings settings)
         {
-            var noise = m_NoiseGenerator.GenerateNoise((int)map.Width, (int)map.Height, Seed, NoiseFrequency);
+            var noise = this.m_PerlinNoiseGenerator.GenerateNoise((int)map.Width, (int)map.Height, Seed, NoiseFrequency);
 
             var mapCenter = new Point2D(map.Width / 2, map.Height / 2);
 

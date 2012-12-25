@@ -120,7 +120,8 @@ namespace Triangulation
                     DisplayLinealBorders = this.checkBoxLinealBorders.Checked,
                     DisplayNoiseBorders = this.checkBoxNoiseBorders.Checked,
                     DisplayPolygons = this.checkBoxPolygons.Checked,
-                    DisplayRivers = this.checkBoxShowRivers.Checked
+                    DisplayRivers = this.checkBoxShowRivers.Checked,
+                    DisplayLakes = this.checkBoxShowLakes.Checked
                 };
             return settings;
         }

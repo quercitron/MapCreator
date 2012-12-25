@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 using Triangulation.Algorithm.GeometryBase;
 
@@ -33,7 +34,21 @@ namespace Triangulation.MapObjects
         public bool IsLakeCoast { get; set; }
 
         public bool IsLand { get; set; }
-        public bool IsWater { get; set; }
+
+        // TODO: think about property
+        public bool IsWater
+        {
+            get
+            {
+                if (IsLake || IsOcean || IsRiver)
+                {
+                    return true;
+                }
+
+                return Polygons.Any(p => !p.IsLand);
+            }
+        }
+
         public double Elevation { get; set; }
 
         public double DistanceForMoisture { get; set; }
@@ -41,5 +56,10 @@ namespace Triangulation.MapObjects
         public bool IsOcean { get; set; }
         public bool IsLake { get; set; }
         public bool IsRiver { get; set; }
+
+        public double Moisture { get; set; }
+
+        // TODO: think about name
+        public double DistanceFromCoast { get; set; }
     }
 }

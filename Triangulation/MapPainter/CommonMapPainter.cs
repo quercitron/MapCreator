@@ -14,7 +14,7 @@ namespace Triangulation.MapPainter
 
         // TODO: Change palette technic
         private readonly Palette m_Palette = new Palette();
-        private readonly PerlinNoiseGenerator m_NoiseGenerator = new PerlinNoiseGenerator();
+        private readonly PerlinNoiseGenerator m_PerlinNoiseGenerator = new PerlinNoiseGenerator();
         private readonly Random m_Random = new Random();
 
         public Bitmap DrawMap(IMap map, DrawSettings settings)
@@ -77,7 +77,7 @@ namespace Triangulation.MapPainter
                         {
                             graphics.FillPolygon(oceanBrush, polygon.CornersToDraw.Select(p => (PointF)p).ToArray());
                         }
-                        if (polygon.IsLake)
+                        if (polygon.IsLake && settings.DisplayLakes)
                         {
                             graphics.FillPolygon(lakeBrush, polygon.CornersToDraw.Select(p => (PointF)p).ToArray());
                         }
@@ -110,7 +110,7 @@ namespace Triangulation.MapPainter
 
             if (settings.ApplyNoise)
             {
-                var noise = this.m_NoiseGenerator.GenerateNoise(width, height, this.m_Random.Next(), Math.Max(width, height));
+                var noise = this.m_PerlinNoiseGenerator.GenerateNoise(width, height, this.m_Random.Next(), Math.Max(width, height));
 
                 for (int i = 0; i < width; i++)
                 {

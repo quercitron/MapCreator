@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using Triangulation.Algorithm.GeometryBase;
 using Triangulation.MapObjects;
 
-namespace Triangulation.MapBuilding.LandGenerators
+namespace Triangulation.MapBuilding
 {
     internal class SkeletonLandGenerator : IMapBuilderComponent
     {

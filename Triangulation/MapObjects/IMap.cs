@@ -18,7 +18,7 @@ namespace Triangulation.MapObjects
 
         int MaxDistanceFromEdge { get; set; }
 
-        double GetMaxElevation { get; }
+        double GetMaxCornerElevation { get; }
 
         bool ContainsPointInside(Point2D point);
 

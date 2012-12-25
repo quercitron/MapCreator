@@ -5,13 +5,13 @@ using Triangulation.MapObjects;
 
 namespace Triangulation.MapBuilding
 {
-    internal class DefineWaterTypesBuilderComponent : IMapBuilderComponent
+    internal class DefineOcean : IMapBuilderComponent
     {
         public void Build(IMap map, MapSettings settings)
         {
             foreach (var polygon in map.Polygons)
             {
-                if (!polygon.IsInside)
+                if (!polygon.IsInside && !polygon.IsOcean)
                 {
                     polygon.IsOcean = true;
 
@@ -21,8 +21,7 @@ namespace Triangulation.MapBuilding
                     while (queue.Count > 0)
                     {
                         var current = queue.Dequeue();
-                        foreach (
-                            var neighbor in current.Polygons.Where(neighbor => !neighbor.IsLand && !neighbor.IsOcean))
+                        foreach (var neighbor in current.Polygons.Where(neighbor => !neighbor.IsLand && !neighbor.IsOcean))
                         {
                             neighbor.IsOcean = true;
                             queue.Enqueue(neighbor);
@@ -31,6 +30,12 @@ namespace Triangulation.MapBuilding
 
                     break;
                 }
+            }
+
+            foreach (var corner in map.Corners)
+            {
+                corner.IsLand = corner.Polygons.Any(p => p.IsLand);
+                corner.IsOcean = corner.Polygons.Any(p => p.IsOcean);
             }
         }
     }

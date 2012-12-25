@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,21 +10,19 @@ using Triangulation.MapObjects;
 
 namespace Triangulation.MapBuilding
 {
-    internal class CalculateElevationBuilderComponent : IMapBuilderComponent
+    internal class DistanceFromWaterElevation : BaseElevationGenerator
     {
-        private readonly double SmallStep = 1e-6;
-
-        public CalculateElevationBuilderComponent(PerlinNoiseGenerator noiseGenerator)
+        public DistanceFromWaterElevation(INoiseGenerator noiseGenerator)
         {
             this.m_NoiseGenerator = noiseGenerator;
         }
 
-        private readonly PerlinNoiseGenerator m_NoiseGenerator;
+        private readonly INoiseGenerator m_NoiseGenerator;
 
         // TODO: Change random
         private Random m_Random = new Random();
 
-        public void Build(IMap map, MapSettings settings)
+        public override void Build(IMap map, MapSettings settings)
         {
             Comparison<Corner> comparison = (a, b) => -a.Elevation.CompareTo(b.Elevation);
             var queue = new PriorityQueue<Corner>(comparison);
@@ -89,7 +87,7 @@ namespace Triangulation.MapBuilding
 
                         if (corner.IsLake)
                         {
-                            double bigStep = 2 * map.Corners.Count * SmallStep;
+                            double bigStep = 2 * map.Corners.Count * this.SmallStep;
 
                             var lakeQueue = new Queue<Corner>();
                             lakeQueue.Enqueue(corner);
@@ -100,7 +98,7 @@ namespace Triangulation.MapBuilding
                                 {
                                     if (c.IsLake && c.Elevation > lakeCorner.Elevation + bigStep)
                                     {
-                                        c.Elevation = lakeCorner.Elevation + SmallStep;
+                                        c.Elevation = lakeCorner.Elevation + this.SmallStep;
                                         lakeQueue.Enqueue(c);
                                         queue.Enqueue(c);
                                     }
@@ -112,25 +110,14 @@ namespace Triangulation.MapBuilding
             }
 
 
-            NormalizeElevation(map);
+            this.NormalizeCornerElevation(map);
 
-            foreach (var polygon in map.Polygons)
+            //TODO: obsolete?
+            /*foreach (var polygon in map.Polygons)
             {
-                polygon.Elevation = polygon.IsLand ? polygon.Corners.Average(p => p.Elevation) : 0;
-            } 
-        }
-
-        private static void NormalizeElevation(IMap map)
-        {
-            var maxElevation = map.GetMaxElevation;
-            if (maxElevation > 0)
-            {
-                foreach (var corner in map.Corners)
-                {
-                    corner.Elevation /= maxElevation;
-                    corner.Elevation *= corner.Elevation;
-                }
-            }
+                polygon.Elevation = polygon.Corners.Average(p => p.Elevation);
+                //polygon.Elevation = polygon.IsLand ? polygon.Corners.Average(p => p.Elevation) : 0;
+            } */
         }
     }
 }
