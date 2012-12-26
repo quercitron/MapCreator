@@ -43,7 +43,10 @@ namespace Triangulation.MapPainter
                 case TerrainType.Lake:
                     result = Color.CornflowerBlue;
                     break;
-                case TerrainType.Ocean:
+                case TerrainType.ShallowOcean:
+                    result = Color.CornflowerBlue;
+                    break;
+                case TerrainType.DeepOcean:
                     result = Color.RoyalBlue;
                     break;
                 case TerrainType.Scorched:

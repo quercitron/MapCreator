@@ -34,7 +34,9 @@ namespace Triangulation.MapBuilding
                     // TODO: Chack how can it be
                     if (corner != null)
                     {
-                        var newDist = current.DistanceForMoisture + Geometry.Dist(current, corner);
+                        // TODO: improve mechanic
+                        double k = corner.Elevation > current.Elevation ? 0.4 : 1;
+                        var newDist = current.DistanceForMoisture + Geometry.Dist(current, corner) * k;
                         if (corner.DistanceForMoisture > newDist)
                         {
                             corner.DistanceForMoisture = newDist;

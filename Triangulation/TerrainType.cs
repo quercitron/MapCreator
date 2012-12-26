@@ -15,7 +15,8 @@
         Tundra,
         Bare,
         Scorched,
-        Ocean,
+        ShallowOcean,
+        DeepOcean,
         Lake
     }
 }

@@ -87,7 +87,8 @@ namespace Triangulation.MapPainter
                             }
                             else
                             {
-                                graphics.FillPolygon(oceanBrush, polygon.CornersToDraw.Select(p => (PointF)p).ToArray());
+                                var newOceanBrush = new SolidBrush(m_Palette.GetPolygonColor(polygon));
+                                graphics.FillPolygon(newOceanBrush, polygon.CornersToDraw.Select(p => (PointF)p).ToArray());
                             }
                         }
                         if (polygon.IsLake)

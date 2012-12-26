@@ -87,43 +87,46 @@ namespace Triangulation.MapBuilding
                 }
             }
 
-            var maxDistance = map.Corners.Where(c => c.IsLand).Max(c => c.DistanceFromCoast);
-            foreach (var corner in map.Corners)
+            if (map.Corners.Any(c => c.IsLand))
             {
-                double noiseInCorner;
-                if (map.ContainsPointInside(corner))
+                var maxDistance = map.Corners.Where(c => c.IsLand).Max(c => c.DistanceFromCoast);
+                foreach (var corner in map.Corners)
                 {
-                    noiseInCorner = noise[(int)corner.X, (int)corner.Y];
-                }
-                else
-                {
-                    var point = new Point2D(corner);
-                    if (point.X < 0)
+                    double noiseInCorner;
+                    if (map.ContainsPointInside(corner))
                     {
-                        point.X = 0;
+                        noiseInCorner = noise[(int) corner.X, (int) corner.Y];
                     }
-                    if (point.X >= map.Width - 1)
+                    else
                     {
-                        point.X = map.Width - 1;
+                        var point = new Point2D(corner);
+                        if (point.X < 0)
+                        {
+                            point.X = 0;
+                        }
+                        if (point.X >= map.Width - 1)
+                        {
+                            point.X = map.Width - 1;
+                        }
+                        if (point.Y < 0)
+                        {
+                            point.Y = 0;
+                        }
+                        if (point.Y >= map.Height - 1)
+                        {
+                            point.Y = map.Height - 1;
+                        }
+                        noiseInCorner = noise[(int) point.X, (int) point.Y];
                     }
-                    if (point.Y < 0)
-                    {
-                        point.Y = 0;
-                    }
-                    if (point.Y >= map.Height - 1)
-                    {
-                        point.Y = map.Height - 1;
-                    }
-                    noiseInCorner = noise[(int)point.X, (int)point.Y];
-                }
 
-                if (corner.IsOcean)
-                {
-                    corner.Elevation = -Math.Min(corner.DistanceFromCoast / maxDistance, noiseInCorner);
-                }
-                else
-                {
-                    corner.Elevation = Math.Min(corner.DistanceFromCoast / maxDistance, noiseInCorner);
+                    if (corner.IsOcean)
+                    {
+                        corner.Elevation = -Math.Min(corner.DistanceFromCoast/maxDistance, noiseInCorner);
+                    }
+                    else
+                    {
+                        corner.Elevation = Math.Min(corner.DistanceFromCoast/maxDistance, noiseInCorner);
+                    }
                 }
             }
 

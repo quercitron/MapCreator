@@ -141,7 +141,15 @@ namespace Triangulation.MapBuilding
                         }
                         if (polygon.IsOcean)
                         {
-                            terranType = TerrainType.Ocean;
+                            // TODO: think about certan numbers
+                            if (polygon.Elevation > -0.2)
+                            {
+                                terranType = TerrainType.ShallowOcean;
+                            }
+                            else
+                            {
+                                terranType = TerrainType.DeepOcean;
+                            }
                         }
                     }
 
