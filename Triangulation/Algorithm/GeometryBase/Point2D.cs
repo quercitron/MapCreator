@@ -11,6 +11,11 @@ namespace Triangulation.Algorithm.GeometryBase
             Y = y;
         }
 
+        public Point2D(Point2D point)
+            : this(point.X, point.Y)
+        {
+        }
+
         public double X { get; set; }
         public double Y { get; set; }
 

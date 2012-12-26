@@ -28,7 +28,10 @@ namespace Triangulation
         private const int AddRangeCount = 10;
 
         private const int MaxWidth = 1200;
+        //private const int MaxWidth = 1920;
+
         private const int MaxHeight = 900;
+        //private const int MaxHeight = 1080;
 
         public MainForm()
         {
@@ -203,7 +206,7 @@ namespace Triangulation
                 Directory.CreateDirectory(dirPath);
             }
 
-            var imageName = string.Format("Map_{0}x{1}_{2}", m_Map.Width, m_Map.Height, numericUpDownSeed.Value);
+            var imageName = string.Format("Map_{0}x{1}_{2}", m_Bitmap.Width, m_Bitmap.Height, numericUpDownSeed.Value);
 
             if (File.Exists(Path.Combine(dirPath, imageName + ".bmp")))
             {

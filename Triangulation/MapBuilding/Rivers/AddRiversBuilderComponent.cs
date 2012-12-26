@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
 using Triangulation.Algorithm.GeometryBase;
-using Triangulation.Algorithm.PriorityQueue;
 using Triangulation.MapObjects;
 
 namespace Triangulation.MapBuilding
@@ -12,6 +10,8 @@ namespace Triangulation.MapBuilding
     {
         private readonly double BigRiversAreaPart = 0.1;
         private readonly double SmallRiversAreaPart = 0.5;
+
+        private readonly double SmallStep = 1e-8;
 
         public override void Build(IMap map, MapSettings settings)
         {
@@ -22,7 +22,7 @@ namespace Triangulation.MapBuilding
 
                 List<Corner> riverSources = null;
 
-                for (int k = 0; k < 50; k++)
+                for (int k = 0; k < 5000; k++)
                 {
                     List<Corner> newSources = new List<Corner>();
 
@@ -39,6 +39,14 @@ namespace Triangulation.MapBuilding
                     {
                         riverSources = newSources;
                     }
+
+                    // TODO: maybe remove this strange thing
+                    foreach (var source in riverSources)
+                    {
+                        this.AddRiver(source);
+                    }
+
+                    ResetRivers(map);
                 }
 
                 if (riverSources != null)
@@ -47,7 +55,30 @@ namespace Triangulation.MapBuilding
                     {
                         this.AddRiver(source);
                     }
+
+                    for (int k = 0; k < 10; k++)
+                    {
+                        ResetRivers(map);
+
+                        foreach (var source in riverSources)
+                        {
+                            this.AddRiver(source);
+                        }
+                    }
                 }
+            }
+        }
+
+        private void ResetRivers(IMap map)
+        {
+            foreach (var corner in map.Corners)
+            {
+                corner.IsRiver = false;
+            }
+
+            foreach (var border in map.Borders)
+            {
+                border.RiverCapacity = 0;
             }
         }
 
@@ -68,7 +99,12 @@ namespace Triangulation.MapBuilding
                     var newCorner = border.OtherEnd(riverSource);
                     if (!visited.Contains(newCorner))
                     {
-                        if (nextCorner == null || newCorner.Elevation > nextCorner.Elevation)
+                        if (riverSource.IsLake && newCorner.IsLake && border.Polygons[0].IsLand && border.Polygons[1].IsLand)
+                        {
+                            continue;
+                        }
+
+                        if (nextCorner == null || newCorner.Elevation < nextCorner.Elevation)
                         {
                             nextEdge = border;
                             nextCorner = newCorner;
@@ -101,7 +137,12 @@ namespace Triangulation.MapBuilding
                         var newCorner = border.OtherEnd(riverSource);
                         if (!visited.Contains(newCorner))
                         {
-                            if (nextCorner == null || Geometry.Cos(direction, nextCorner) > Geometry.Cos(direction, newCorner))
+                            if (riverSource.IsLake && newCorner.IsLake && border.Polygons[0].IsLand && border.Polygons[1].IsLand)
+                            {
+                                continue;
+                            }
+                            if (nextCorner == null || 
+                                Geometry.Cos(direction, nextCorner - riverSource) < Geometry.Cos(direction, newCorner - riverSource))
                             {
                                 nextEdge = border;
                                 nextCorner = newCorner;
@@ -114,10 +155,14 @@ namespace Triangulation.MapBuilding
                         return;
                     }
 
-                    nextCorner.Elevation = riverSource.Elevation;
+                    nextCorner.Elevation = riverSource.Elevation - SmallStep;
                 }
 
-                flow += 1;
+                // TODO: fix eps
+                if (nextEdge.RiverCapacity < 1e-7)
+                {
+                    flow += 1;
+                }
                 nextEdge.RiverCapacity += flow;
                 nextCorner.IsRiver = true;
 

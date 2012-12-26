@@ -21,7 +21,7 @@ namespace Triangulation.MapPainter
         {
             int width = (int)map.Width;
             int height = (int)map.Height;
-            var bitmap = new Bitmap(width + 1, height + 1);
+            var bitmap = new Bitmap(width, height);
 
             Graphics graphics = Graphics.FromImage(bitmap);
             Pen blackPen = new Pen(Color.Black);
@@ -75,11 +75,43 @@ namespace Triangulation.MapPainter
                     {
                         if (polygon.IsOcean)
                         {
-                            graphics.FillPolygon(oceanBrush, polygon.CornersToDraw.Select(p => (PointF)p).ToArray());
+                            if (settings.DisplayElevation)
+                            {
+                                var shallowWaterColor = new MyColor(Color.LightBlue);
+                                var deepWaterLandColor = new MyColor(Color.DarkBlue);
+
+                                Color color = (Color)(-polygon.Elevation / maxDistFromWater * deepWaterLandColor +
+                                                      (1 + polygon.Elevation / maxDistFromWater) * shallowWaterColor);
+
+                                graphics.FillPolygon(new SolidBrush(color), polygon.CornersToDraw.Select(p => (PointF)p).ToArray());
+                            }
+                            else
+                            {
+                                graphics.FillPolygon(oceanBrush, polygon.CornersToDraw.Select(p => (PointF)p).ToArray());
+                            }
                         }
-                        if (polygon.IsLake && settings.DisplayLakes)
+                        if (polygon.IsLake)
                         {
-                            graphics.FillPolygon(lakeBrush, polygon.CornersToDraw.Select(p => (PointF)p).ToArray());
+                            if (settings.DisplayLakes)
+                            {
+                                graphics.FillPolygon(lakeBrush, polygon.CornersToDraw.Select(p => (PointF)p).ToArray());
+                            }
+                            else
+                            {
+                                if (settings.DisplayElevation)
+                                {
+                                    var lowLandColor = new MyColor(Color.Green);
+                                    var highLandColor = new MyColor(Color.Red);
+
+                                    Color color =
+                                        (Color)
+                                        (polygon.Elevation / maxDistFromWater * highLandColor
+                                         + (1 - polygon.Elevation / maxDistFromWater) * lowLandColor);
+
+                                    graphics.FillPolygon(
+                                        new SolidBrush(color), polygon.CornersToDraw.Select(p => (PointF)p).ToArray());
+                                }
+                            }
                         }
                     }
 
@@ -89,6 +121,19 @@ namespace Triangulation.MapPainter
                     {
                         graphics.DrawLine(new Pen(Color.Green), (PointF) polygon.Borders[i].Center, (PointF) polygon.Borders[i + 1].Center);
                     }*/
+                }
+            }
+
+            if (settings.DisplayRivers)
+            {
+                foreach (var border in map.Borders)
+                {
+                    if (border.RiverCapacity > 0 && (!border.IsLake || !settings.DisplayLakes))
+                    {
+                        var riverPenWidth = (float)Math.Sqrt(30 * border.RiverCapacity / Math.Sqrt(map.Polygons.Count));
+                        riverPen.Width = riverPenWidth;
+                        graphics.DrawLines(riverPen, border.BorderToDraw.Select(p => (PointF)p).ToArray());
+                    }
                 }
             }
 
@@ -141,19 +186,6 @@ namespace Triangulation.MapPainter
                         {
                             graphics.DrawLine(pen, (PointF)border.BorderToDraw[i], (PointF)border.BorderToDraw[i + 1]);
                         }
-                    }
-                }
-            }
-
-            if (settings.DisplayRivers)
-            {
-                foreach (var border in map.Borders)
-                {
-                    if (border.RiverCapacity > 0 && !border.IsLake)
-                    {
-                        var riverPenWidth = (float)Math.Sqrt(30 * border.RiverCapacity / Math.Sqrt(map.Polygons.Count));
-                        riverPen.Width = riverPenWidth;
-                        graphics.DrawLines(riverPen, border.BorderToDraw.Select(p => (PointF)p).ToArray());
                     }
                 }
             }

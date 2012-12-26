@@ -1,8 +1,10 @@
 <Configuration>
   <NamespaceFolders>
+    <SkipFolder>7EAC14EF-9095-4BFA-A557-DDE222836BAE/d:MapBuilding/d:Elevation</SkipFolder>
     <SkipFolder>7EAC14EF-9095-4BFA-A557-DDE222836BAE/d:MapBuilding/d:LandGenerators</SkipFolder>
-    <SkipFolder>7EAC14EF-9095-4BFA-A557-DDE222836BAE/d:MapBuilding/d:TerranType</SkipFolder>
-    <SkipFolder>7EAC14EF-9095-4BFA-A557-DDE222836BAE/d:MapBuilding/d:ElevationGenerator</SkipFolder>
     <SkipFolder>7EAC14EF-9095-4BFA-A557-DDE222836BAE/d:MapBuilding/d:Moisture</SkipFolder>
+    <SkipFolder>7EAC14EF-9095-4BFA-A557-DDE222836BAE/d:MapBuilding/d:TerranType</SkipFolder>
+    <SkipFolder>7EAC14EF-9095-4BFA-A557-DDE222836BAE/d:MapBuilding/d:Rivers</SkipFolder>
+    <SkipFolder>7EAC14EF-9095-4BFA-A557-DDE222836BAE/d:MapBuilding/d:Polygons</SkipFolder>
   </NamespaceFolders>
 </Configuration>

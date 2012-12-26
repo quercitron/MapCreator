@@ -85,6 +85,7 @@
     <Compile Include="MapBuilding\Polygons\FormPolygons.cs" />
     <Compile Include="MapBuilding\Rivers\AddRiversBuilderComponent.cs" />
     <Compile Include="MapBuilding\Rivers\BaseRivers.cs" />
+    <Compile Include="MapBuilding\TerrainBase.cs" />
     <Compile Include="MapBuilding\TerranType\SetTerranTypeFromSite.cs" />
     <Compile Include="MapObjects\IMap.cs" />
     <Compile Include="MapObjects\MapBase.cs" />

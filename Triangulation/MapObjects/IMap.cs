@@ -20,6 +20,8 @@ namespace Triangulation.MapObjects
 
         double GetMaxCornerElevation { get; }
 
+        double Diagonal { get; }
+
         bool ContainsPointInside(Point2D point);
 
         Corner GetRandomCorner();

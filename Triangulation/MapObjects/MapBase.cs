@@ -26,6 +26,13 @@ namespace Triangulation.MapObjects
 
         public double Width { get; private set; }
         public double Height { get; private set; }
+        public double Diagonal
+        {
+            get
+            {
+                return Math.Sqrt(Width * Width + Height * Height);
+            }
+        }
 
         public double GetMaxCornerElevation
         {

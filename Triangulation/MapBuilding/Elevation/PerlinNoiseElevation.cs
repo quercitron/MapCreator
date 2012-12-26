@@ -4,6 +4,7 @@ using System.Linq;
 
 using PerlinNoiseGeneration;
 
+using Triangulation.Algorithm.GeometryBase;
 using Triangulation.Algorithm.PriorityQueue;
 using Triangulation.MapObjects;
 
@@ -27,13 +28,10 @@ namespace Triangulation.MapBuilding
 
             foreach (var corner in map.Corners)
             {
-                if (corner.IsOcean)
+                if (corner.IsOceanCoast)
                 {
                     corner.DistanceFromCoast = 0;
-                    if (corner.IsOceanCoast)
-                    {
-                        queue.Enqueue(corner);
-                    }
+                    queue.Enqueue(corner);
                 }
                 else
                 {
@@ -44,7 +42,7 @@ namespace Triangulation.MapBuilding
             while (queue.Count > 0)
             {
                 var current = queue.Dequeue();
-                foreach (var corner in current.Corners)
+                foreach (var corner in current.Corners.Where(c => c != null))
                 {
                     var dist = current.Dist(corner);
                     if (corner.DistanceFromCoast > current.DistanceFromCoast + dist)
@@ -55,6 +53,9 @@ namespace Triangulation.MapBuilding
 
                         if (corner.IsLake)
                         {
+                            double minNoise = noise[(int)corner.X, (int)corner.Y];
+                            var lakeCorners = new List<Corner> { corner };
+
                             double bigStep = 2 * map.Corners.Count * this.SmallStep;
 
                             var lakeQueue = new Queue<Corner>();
@@ -66,30 +67,65 @@ namespace Triangulation.MapBuilding
                                 {
                                     if (c.IsLake && c.DistanceFromCoast > lakeCorner.DistanceFromCoast + bigStep)
                                     {
-                                        c.DistanceFromCoast = lakeCorner.DistanceFromCoast + this.SmallStep;
+                                        c.DistanceFromCoast = lakeCorner.DistanceFromCoast +
+                                                              this.SmallStep * Geometry.Dist(lakeCorner, c) / map.Diagonal;
                                         lakeQueue.Enqueue(c);
                                         queue.Enqueue(c);
+
+                                        minNoise = Math.Min(minNoise, noise[(int)c.X, (int)c.Y]);
+                                        lakeCorners.Add(c);
                                     }
                                 }
+                            }
+
+                            foreach (var lakeCorner in lakeCorners)
+                            {
+                                noise[(int)lakeCorner.X, (int)lakeCorner.Y] = minNoise;
                             }
                         }
                     }
                 }
             }
 
-            var maxDistance = map.Corners.Max(c => c.DistanceFromCoast);
+            var maxDistance = map.Corners.Where(c => c.IsLand).Max(c => c.DistanceFromCoast);
             foreach (var corner in map.Corners)
             {
-                if (corner.IsOcean)
+                double noiseInCorner;
+                if (map.ContainsPointInside(corner))
                 {
-                    corner.Elevation = 0;
+                    noiseInCorner = noise[(int)corner.X, (int)corner.Y];
                 }
                 else
                 {
-                    corner.Elevation = Math.Min(corner.DistanceFromCoast / maxDistance, noise[(int)corner.X, (int)corner.Y]);
+                    var point = new Point2D(corner);
+                    if (point.X < 0)
+                    {
+                        point.X = 0;
+                    }
+                    if (point.X >= map.Width - 1)
+                    {
+                        point.X = map.Width - 1;
+                    }
+                    if (point.Y < 0)
+                    {
+                        point.Y = 0;
+                    }
+                    if (point.Y >= map.Height - 1)
+                    {
+                        point.Y = map.Height - 1;
+                    }
+                    noiseInCorner = noise[(int)point.X, (int)point.Y];
+                }
+
+                if (corner.IsOcean)
+                {
+                    corner.Elevation = -Math.Min(corner.DistanceFromCoast / maxDistance, noiseInCorner);
+                }
+                else
+                {
+                    corner.Elevation = Math.Min(corner.DistanceFromCoast / maxDistance, noiseInCorner);
                 }
             }
-
 
             this.NormalizeCornerElevation(map);
         }
