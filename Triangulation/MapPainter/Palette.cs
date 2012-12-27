@@ -44,7 +44,7 @@ namespace Triangulation.MapPainter
                     result = Color.CornflowerBlue;
                     break;
                 case TerrainType.ShallowOcean:
-                    result = Color.CornflowerBlue;
+                    result = Color.RoyalBlue; //Color.CornflowerBlue;
                     break;
                 case TerrainType.DeepOcean:
                     result = Color.RoyalBlue;

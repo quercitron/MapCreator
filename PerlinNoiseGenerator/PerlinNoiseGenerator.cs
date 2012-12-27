@@ -2,9 +2,9 @@ using System;
 
 namespace PerlinNoiseGeneration
 {
-    public class PerlinNoiseGenerator : BaseNoiseGenerator 
+    public class PerlinNoiseGenerator : INoiseGenerator
     {        
-        public override double[,] GenerateNoise(int width, int height, int seed, double frequency)
+        public virtual double[,] GenerateNoise(int width, int height, int seed, double frequency)
         {            
             var result = new double[width,height];            
 

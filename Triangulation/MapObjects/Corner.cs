@@ -61,5 +61,7 @@ namespace Triangulation.MapObjects
 
         // TODO: think about name
         public double DistanceFromCoast { get; set; }
+
+        public Lake Lake { get; set; }
     }
 }

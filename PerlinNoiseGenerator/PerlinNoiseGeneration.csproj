@@ -42,8 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseNoiseGenerator.cs" />
     <Compile Include="INoiseGenerator.cs" />
+    <Compile Include="NoiseDecoration\NoiseDecorator.cs" />
+    <Compile Include="NoiseDecoration\NormNoiseDecorator.cs" />
+    <Compile Include="NoiseDecoration\PolarizeNoiseDecorator.cs" />
     <Compile Include="PerlinNoiseGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -22,9 +22,9 @@ namespace Triangulation.MapBuilding
         public override void Build(IMap map, MapSettings settings)
         {
             // TODO: change parameters
-            var noise = m_NoiseGenerator.GenerateNoise((int)map.Width, (int)map.Height, new Random().Next(), 10);
+            var noise = new NormNoiseDecorator(m_NoiseGenerator).GenerateNoise((int)map.Width, (int)map.Height, new Random().Next(), 10);
 
-            PriorityQueue<Corner> queue = new PriorityQueue<Corner>((a, b) => -a.DistanceFromCoast.CompareTo(b.DistanceFromCoast));
+            var queue = new PriorityQueue<Corner>((a, b) => -a.DistanceFromCoast.CompareTo(b.DistanceFromCoast));
 
             foreach (var corner in map.Corners)
             {
@@ -119,13 +119,15 @@ namespace Triangulation.MapBuilding
                         noiseInCorner = noise[(int) point.X, (int) point.Y];
                     }
 
+                    var distanceConstraint = 2 * corner.DistanceFromCoast/maxDistance;
+
                     if (corner.IsOcean)
                     {
-                        corner.Elevation = -Math.Min(corner.DistanceFromCoast/maxDistance, noiseInCorner);
+                        corner.Elevation = -Math.Min(distanceConstraint, noiseInCorner);
                     }
                     else
                     {
-                        corner.Elevation = Math.Min(corner.DistanceFromCoast/maxDistance, noiseInCorner);
+                        corner.Elevation = Math.Min(distanceConstraint, noiseInCorner);
                     }
                 }
             }

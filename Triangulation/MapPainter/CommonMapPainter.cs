@@ -58,16 +58,30 @@ namespace Triangulation.MapPainter
                                 var lowLandColor = new MyColor(Color.Green);
                                 var highLandColor = new MyColor(Color.Red);
 
-                                Color color = (Color)(     polygon.Elevation / maxDistFromWater  * highLandColor +
+                                Color color = (Color)(polygon.Elevation / maxDistFromWater * highLandColor +
                                                       (1 - polygon.Elevation / maxDistFromWater) * lowLandColor);
 
                                 graphics.FillPolygon(new SolidBrush(color), polygon.CornersToDraw.Select(p => (PointF)p).ToArray());
                             }
                             else
                             {
-                                var brush = new SolidBrush(m_Palette.GetPolygonColor(polygon));
-                                graphics.FillPolygon(brush, polygon.CornersToDraw.Select(p => (PointF)p).Reverse().ToArray());
-                                //graphics.FillPolygon(landBrush, polygon.CornersToDraw.Select(p => (PointF)p).ToArray());
+                                if (settings.DisplayMoisture)
+                                {
+
+                                    var dryLandColor = new MyColor(Color.White);
+                                    var wetLandColor = new MyColor(Color.Blue);
+
+                                    Color color = (Color)(polygon.Moisture * wetLandColor + (1 - polygon.Moisture) * dryLandColor);
+
+                                    graphics.FillPolygon(new SolidBrush(color), polygon.CornersToDraw.Select(p => (PointF)p).ToArray());
+                                }
+                                else
+                                {
+                                    var brush = new SolidBrush(m_Palette.GetPolygonColor(polygon));
+                                    graphics.FillPolygon(
+                                        brush, polygon.CornersToDraw.Select(p => (PointF)p).Reverse().ToArray());
+                                    //graphics.FillPolygon(landBrush, polygon.CornersToDraw.Select(p => (PointF)p).ToArray());
+                                }
                             }
                         }
                     }
@@ -156,7 +170,8 @@ namespace Triangulation.MapPainter
 
             if (settings.ApplyNoise)
             {
-                var noise = this.m_PerlinNoiseGenerator.GenerateNoise(width, height, this.m_Random.Next(), Math.Max(width, height));
+                //var noise = this.m_PerlinNoiseGenerator.GenerateNoise(width, height, this.m_Random.Next(), Math.Max(width, height));
+                var noise = this.m_PerlinNoiseGenerator.GenerateNoise(width, height, this.m_Random.Next(), 100);
 
                 for (int i = 0; i < width; i++)
                 {

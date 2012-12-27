@@ -1,31 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
-using PerlinNoiseGeneration;
-
 using Triangulation.Algorithm.GeometryBase;
-using Triangulation.Dividing;
-using Triangulation.MapObjects;
 using Triangulation.MapPainter;
 
 namespace Triangulation
 {
     public partial class MainForm : Form
     {
-        private Structure m_Structure;
-
-        private IMap m_Map;
-        private MapSettings m_DefaultSettings;
-
-        private Bitmap m_Bitmap;
+        private MapCreatorModel m_MapCreatorModel;
 
         private readonly Random m_Random = new Random();
-        private const int AddRangeCount = 10;
 
         private const int MaxWidth = 1200;
         //private const int MaxWidth = 1920;
@@ -39,17 +26,24 @@ namespace Triangulation
 
             AddCheckboxEvents();
 
+            m_MapCreatorModel = new MapCreatorModel(MaxWidth, MaxHeight)
+                { Seed = (int)this.numericUpDownSeed.Value, DrawSettings = this.GetSettings() };
+            m_MapCreatorModel.ImageUpdated += this.RedrawMapImage;
+
             panel1.Width = MaxWidth;
             panel1.Height = MaxHeight;
+        }
 
-            InitMap();
+        private void RedrawMapImage(object sender, EventArgs e)
+        {
+            this.Refresh();
         }
 
         private void AddCheckboxEvents()
         {
             foreach (var checkbox in this.GetAllControls(this, typeof (CheckBox)))
             {
-                ((CheckBox) checkbox).CheckedChanged += RedrawMap;
+                ((CheckBox) checkbox).CheckedChanged += UpdateSettings;
             }
 
             /*checkBoxLinealBorders.CheckedChanged += RedrawMap;
@@ -62,6 +56,12 @@ namespace Triangulation
             checkBoxCoast.CheckedChanged += RedrawMap;*/
         }
 
+        private void UpdateSettings(object sender, EventArgs e)
+        {
+            m_MapCreatorModel.DrawSettings = this.GetSettings();
+            m_MapCreatorModel.UpdateImage();
+        }
+
         public IEnumerable<Control> GetAllControls(Control control, Type type)
         {
             var controls = control.Controls.Cast<Control>();
@@ -71,48 +71,6 @@ namespace Triangulation
                                       .Where(c => c.GetType() == type);
         }
 
-        private void InitMap()
-        {
-            m_DefaultSettings = new MapSettings
-                {
-                    LandPart = 0.4
-                };
-            CreateNewStructure();
-
-            DrawMap();
-            this.Refresh();
-        }
-
-        private void CreateNewStructure()
-        {
-            m_Structure = new Structure(MaxWidth, MaxHeight);
-
-            var mapFactory = new MapFactory(m_Structure);
-            m_Map = mapFactory.CreateMap((int)numericUpDownSeed.Value, m_DefaultSettings);
-
-            m_Structure.StructureChanged += OnStrucureChanged;
-        }
-
-        private void OnStrucureChanged(object sender, EventArgs e)
-        {
-            var mapFactory = new MapFactory(m_Structure);
-            m_Map = mapFactory.CreateMap((int)numericUpDownSeed.Value, m_DefaultSettings);
-
-            RedrawMap(sender, e);
-        }
-
-        private void RedrawMap(object sender, EventArgs e)
-        {
-            DrawMap();
-            this.Refresh();
-        }
-
-        private void DrawMap()
-        {
-            var settings = GetSettings();
-            m_Bitmap = new CommonMapPainter().DrawMap(m_Map, settings);
-        }
-
         private DrawSettings GetSettings()
         {
             var settings = new DrawSettings
@@ -120,6 +78,7 @@ namespace Triangulation
                     ApplyNoise = this.checkBoxApplyNoise.Checked,
                     DisplayCoast = this.checkBoxCoast.Checked,
                     DisplayElevation = this.checkBoxElevation.Checked,
+                    DisplayMoisture = this.checkBoxShowMoisture.Checked,
                     DisplayLinealBorders = this.checkBoxLinealBorders.Checked,
                     DisplayNoiseBorders = this.checkBoxNoiseBorders.Checked,
                     DisplayPolygons = this.checkBoxPolygons.Checked,
@@ -133,9 +92,10 @@ namespace Triangulation
         {
             Point2D point = new Point2D(m_Random.NextDouble() * MaxWidth, m_Random.NextDouble() * MaxHeight);
 
+            // TODO: centralize try/catch
             try
             {                
-                m_Structure.AddPoint(point);
+                m_MapCreatorModel.AddPoint(point);
             }
             catch (ApplicationException ex)
             {
@@ -145,24 +105,14 @@ namespace Triangulation
 
         private void ButtonAddRangeClick(object sender, EventArgs e)
         {
-            AddRangeOfPoints((int) nudAddCount.Value);
-        }
-
-        private void AddRangeOfPoints(int total)
-        {
-            List<Point2D> points = new List<Point2D>(total);
-            for (int i = 0; i < total; i++)
-            {
-                points.Add(new Point2D(m_Random.NextDouble() * MaxWidth, m_Random.NextDouble() * MaxHeight));
-            }
-            m_Structure.AddPointRange(points);
+            m_MapCreatorModel.AddRangeOfPoints((int)nudAddCount.Value);
         }
 
         private void Panel1Paint(object sender, PaintEventArgs e)
         {
-            if (m_Bitmap != null)
+            if (m_MapCreatorModel.Bitmap != null)
             {
-                e.Graphics.DrawImage(m_Bitmap, 0, 0);
+                e.Graphics.DrawImage(m_MapCreatorModel.Bitmap, 0, 0);
             }
         }
 
@@ -170,21 +120,18 @@ namespace Triangulation
         {
             base.OnMouseClick(e);
 
-            m_Structure.AddPoint(new Point2D(e.X, e.Y));
+            m_MapCreatorModel.AddPoint(new Point2D(e.X, e.Y));
         }
 
         private void ButtonResetClick(object sender, EventArgs e)
         {
-            InitMap();
+            //InitMap();
+            m_MapCreatorModel.Reset();
         }
 
         private void ButtonRedrawClick(object sender, EventArgs e)
         {
-            int currentCount = m_Structure.Points.Count;
-
-            CreateNewStructure();
-
-            AddRangeOfPoints(currentCount - 4);
+            m_MapCreatorModel.Redraw();
         }
 
         private void ButtonSeedClick(object sender, EventArgs e)
@@ -192,36 +139,14 @@ namespace Triangulation
             numericUpDownSeed.Value = m_Random.Next((int) numericUpDownSeed.Maximum);
         }
 
-        private void buttonSave_Click(object sender, EventArgs e)
+        private void ButtonSaveClick(object sender, EventArgs e)
         {
-            SaveMapImage();
+            m_MapCreatorModel.SaveMapImage();
         }
 
-        private void SaveMapImage()
+        private void NumericUpDownSeedValueChanged(object sender, EventArgs e)
         {
-            var dirPath = "Images";
-
-            if (!Directory.Exists(dirPath))
-            {
-                Directory.CreateDirectory(dirPath);
-            }
-
-            var imageName = string.Format("Map_{0}x{1}_{2}", m_Bitmap.Width, m_Bitmap.Height, numericUpDownSeed.Value);
-
-            if (File.Exists(Path.Combine(dirPath, imageName + ".bmp")))
-            {
-                for (int i = 2;; i++)
-                {
-                    var newImageName = string.Format("{0}_{1}", imageName, i);
-                    if (!File.Exists(Path.Combine(dirPath, newImageName + ".bmp")))
-                    {
-                        imageName = newImageName;
-                        break;
-                    }
-                }
-            }
-
-            m_Bitmap.Save(Path.Combine(dirPath, imageName + ".bmp"));
+            m_MapCreatorModel.Seed = (int)this.numericUpDownSeed.Value;
         }
     }
 }

@@ -78,6 +78,7 @@
     <Compile Include="MapBuilding\DefineOcean.cs" />
     <Compile Include="MapBuilding\Elevation\PerlinNoiseElevation.cs" />
     <Compile Include="MapBuilding\IMapBuilderComponent.cs" />
+    <Compile Include="MapBuilding\Lakes\StructureLakes.cs" />
     <Compile Include="MapBuilding\LandGenerators\ImprovedPerlinNoiseLandGenerator.cs" />
     <Compile Include="MapBuilding\LandGenerators\PerlinNoiseLandGenerator.cs" />
     <Compile Include="MapBuilding\LandGenerators\SkeletonLandGenerator.cs" />
@@ -85,9 +86,14 @@
     <Compile Include="MapBuilding\Polygons\FormPolygons.cs" />
     <Compile Include="MapBuilding\Rivers\AddRiversBuilderComponent.cs" />
     <Compile Include="MapBuilding\Rivers\BaseRivers.cs" />
+    <Compile Include="MapBuilding\Rivers\CommonAddRiverStrategy.cs" />
+    <Compile Include="MapBuilding\Rivers\IAddRiverStrategy.cs" />
+    <Compile Include="MapBuilding\Rivers\ImprovedRiverStrategy.cs" />
     <Compile Include="MapBuilding\TerrainBase.cs" />
     <Compile Include="MapBuilding\TerranType\SetTerranTypeFromSite.cs" />
+    <Compile Include="MapCreatorModel.cs" />
     <Compile Include="MapObjects\IMap.cs" />
+    <Compile Include="MapObjects\Lake.cs" />
     <Compile Include="MapObjects\MapBase.cs" />
     <Compile Include="MapObjects\MapSettings.cs" />
     <Compile Include="MapPainter\CommonMapPainter.cs" />
