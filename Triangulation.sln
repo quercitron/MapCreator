@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerlinNoiseGeneration", "Pe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoiseGeneratorTestApp", "NoiseGeneratorTestApp\NoiseGeneratorTestApp.csproj", "{C9A9D5F0-9FED-4979-AA74-23A805A45DAF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapCreatorUI", "MapCreatorUI\MapCreatorUI.csproj", "{5252EAB8-DF14-4ED0-BB9B-E9745EC69DAD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,7 +25,8 @@ Global
 		{7EAC14EF-9095-4BFA-A557-DDE222836BAE}.Debug|Mixed Platforms.Build.0 = Debug|x86
 		{7EAC14EF-9095-4BFA-A557-DDE222836BAE}.Debug|x86.ActiveCfg = Debug|x86
 		{7EAC14EF-9095-4BFA-A557-DDE222836BAE}.Debug|x86.Build.0 = Debug|x86
-		{7EAC14EF-9095-4BFA-A557-DDE222836BAE}.Release|Any CPU.ActiveCfg = Release|x86
+		{7EAC14EF-9095-4BFA-A557-DDE222836BAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EAC14EF-9095-4BFA-A557-DDE222836BAE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7EAC14EF-9095-4BFA-A557-DDE222836BAE}.Release|Mixed Platforms.ActiveCfg = Release|x86
 		{7EAC14EF-9095-4BFA-A557-DDE222836BAE}.Release|Mixed Platforms.Build.0 = Release|x86
 		{7EAC14EF-9095-4BFA-A557-DDE222836BAE}.Release|x86.ActiveCfg = Release|x86
@@ -44,11 +47,22 @@ Global
 		{C9A9D5F0-9FED-4979-AA74-23A805A45DAF}.Debug|Mixed Platforms.Build.0 = Debug|x86
 		{C9A9D5F0-9FED-4979-AA74-23A805A45DAF}.Debug|x86.ActiveCfg = Debug|x86
 		{C9A9D5F0-9FED-4979-AA74-23A805A45DAF}.Debug|x86.Build.0 = Debug|x86
-		{C9A9D5F0-9FED-4979-AA74-23A805A45DAF}.Release|Any CPU.ActiveCfg = Release|x86
+		{C9A9D5F0-9FED-4979-AA74-23A805A45DAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9A9D5F0-9FED-4979-AA74-23A805A45DAF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C9A9D5F0-9FED-4979-AA74-23A805A45DAF}.Release|Mixed Platforms.ActiveCfg = Release|x86
 		{C9A9D5F0-9FED-4979-AA74-23A805A45DAF}.Release|Mixed Platforms.Build.0 = Release|x86
 		{C9A9D5F0-9FED-4979-AA74-23A805A45DAF}.Release|x86.ActiveCfg = Release|x86
 		{C9A9D5F0-9FED-4979-AA74-23A805A45DAF}.Release|x86.Build.0 = Release|x86
+		{5252EAB8-DF14-4ED0-BB9B-E9745EC69DAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5252EAB8-DF14-4ED0-BB9B-E9745EC69DAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5252EAB8-DF14-4ED0-BB9B-E9745EC69DAD}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5252EAB8-DF14-4ED0-BB9B-E9745EC69DAD}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5252EAB8-DF14-4ED0-BB9B-E9745EC69DAD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5252EAB8-DF14-4ED0-BB9B-E9745EC69DAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5252EAB8-DF14-4ED0-BB9B-E9745EC69DAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5252EAB8-DF14-4ED0-BB9B-E9745EC69DAD}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5252EAB8-DF14-4ED0-BB9B-E9745EC69DAD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5252EAB8-DF14-4ED0-BB9B-E9745EC69DAD}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

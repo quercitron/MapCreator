@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Windows.Forms;
 
-namespace Triangulation
+namespace MapCreatorUI
 {
     static class Program
     {

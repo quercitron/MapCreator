@@ -182,7 +182,7 @@ namespace Triangulation.MapPainter
                 }
             }
 
-            if (settings.DisplayCoast)
+            if (settings.DisplayCoastline)
             {
                 foreach (var border in map.Borders)
                 {

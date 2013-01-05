@@ -1,6 +1,6 @@
 ﻿namespace Triangulation.MapPainter
 {
-    internal class DrawSettings
+    public class DrawSettings
     {
         public bool DisplayPolygons { get; set; }
         public bool DisplayCoast { get; set; }
@@ -12,5 +12,7 @@
         public bool ApplyNoise { get; set; }
 
         public bool DisplayLakes { get; set; }
+
+        public bool DisplayCoastline { get; set; }
     }
 }

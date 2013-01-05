@@ -1,16 +1,16 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-
+using Triangulation;
 using Triangulation.Algorithm.GeometryBase;
 using Triangulation.MapPainter;
 
-namespace Triangulation
+namespace MapCreatorUI
 {
     public partial class MainForm : Form
     {
-        private MapCreatorModel m_MapCreatorModel;
+        private readonly MapCreatorModel m_MapCreatorModel;
 
         private readonly Random m_Random = new Random();
 
@@ -64,7 +64,7 @@ namespace Triangulation
 
         public IEnumerable<Control> GetAllControls(Control control, Type type)
         {
-            var controls = control.Controls.Cast<Control>();
+            var controls = control.Controls.Cast<Control>().ToList();
 
             return controls.SelectMany(ctrl => this.GetAllControls(ctrl, type))
                                       .Concat(controls)
@@ -77,6 +77,7 @@ namespace Triangulation
                 {
                     ApplyNoise = this.checkBoxApplyNoise.Checked,
                     DisplayCoast = this.checkBoxCoast.Checked,
+                    DisplayCoastline = this.checkBoxCoastLine.Checked,
                     DisplayElevation = this.checkBoxElevation.Checked,
                     DisplayMoisture = this.checkBoxShowMoisture.Checked,
                     DisplayLinealBorders = this.checkBoxLinealBorders.Checked,
@@ -118,9 +119,10 @@ namespace Triangulation
 
         private void Panel1MouseClick(object sender, MouseEventArgs e)
         {
-            base.OnMouseClick(e);
+            // TODO: think about functionality
+            /*base.OnMouseClick(e);
 
-            m_MapCreatorModel.AddPoint(new Point2D(e.X, e.Y));
+            m_MapCreatorModel.AddPoint(new Point2D(e.X, e.Y));*/
         }
 
         private void ButtonResetClick(object sender, EventArgs e)

@@ -72,18 +72,27 @@ namespace Triangulation.MapBuilding
                 {
                     if (corner.IsLand)
                     {
-                        if (corner.DistanceForMoisture < m_MaxDist)
+                        if (corner.IsOcean)
                         {
-                            corner.Moisture = Math.Max(0, 1 - 0.3 * corner.DistanceForMoisture / avgDistance);
+                            // TODO: think about moisture on water
+                            corner.Moisture = 0;
                         }
                         else
                         {
-                            corner.Moisture = 0;
+                            if (corner.DistanceForMoisture < m_MaxDist)
+                            {
+                                corner.Moisture = Math.Max(0, 1 - 0.3*corner.DistanceForMoisture/avgDistance);
+                            }
+                            else
+                            {
+                                corner.Moisture = 0;
+                            }
                         }
                     }
                     else
                     {
-                        corner.Moisture = 1;
+                        // TODO: think about moisture on water
+                        corner.Moisture = 0;
                     }
                 }
             }

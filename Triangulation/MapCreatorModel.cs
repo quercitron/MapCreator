@@ -11,7 +11,7 @@ using Triangulation.MapPainter;
 
 namespace Triangulation
 {
-    internal class MapCreatorModel
+    public class MapCreatorModel
     {
         public MapCreatorModel(double maxWidth, double maxHeight)
         {
@@ -30,16 +30,16 @@ namespace Triangulation
 
         private IMap m_Map;
 
-        private IMapFactory m_MapFactory = new MapFactory();
+        private readonly IMapFactory m_MapFactory = new MapFactory();
 
-        private IMapPainter m_MapPainter = new CommonMapPainter();
+        private readonly IMapPainter m_MapPainter = new CommonMapPainter();
 
         public DrawSettings DrawSettings { get; set; }
 
-        private MapSettings m_DefaultSettings;
+        private readonly MapSettings m_DefaultSettings;
 
         // TODO: change random
-        private Random m_Random = new Random();
+        private readonly Random m_Random = new Random();
 
         public Bitmap Bitmap { get; set; }
 
@@ -82,7 +82,7 @@ namespace Triangulation
 
         public void Reset()
         {
-            m_Structure = null;
+            CreateNewStructure();
         }
 
         public void Redraw()

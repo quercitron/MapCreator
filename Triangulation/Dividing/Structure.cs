@@ -7,7 +7,7 @@ using Triangulation.Algorithm.GeometryBase;
 
 namespace Triangulation.Dividing
 {
-    internal class Structure
+    public class Structure
     {
         private static readonly Random Rnd = new Random();
         private readonly Queue<Triangle> m_TrianglesToCheck = new Queue<Triangle>();

@@ -51,6 +51,8 @@ namespace Triangulation.MapObjects
             return Polygons[m_Rnd.Next(Polygons.Count)];
         }
 
+        public string CreationReport { get; set; }
+
         public Corner GetRandomCorner()
         {
             return Corners[m_Rnd.Next(Corners.Count)];

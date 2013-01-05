@@ -27,5 +27,7 @@ namespace Triangulation.MapObjects
         Corner GetRandomCorner();
 
         Polygon GetRandomPolygon();
+
+        string CreationReport { get; set; }
     }
 }

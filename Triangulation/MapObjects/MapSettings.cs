@@ -1,6 +1,6 @@
 ﻿namespace Triangulation.MapObjects
 {
-    internal class MapSettings
+    public class MapSettings
     {
         public double LandPart { get; set; }
     }

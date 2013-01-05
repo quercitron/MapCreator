@@ -17,12 +17,13 @@ namespace Triangulation.MapBuilding
             this.m_NoiseGenerator = noiseGenerator;
         }
 
-        private INoiseGenerator m_NoiseGenerator;
+        private readonly INoiseGenerator m_NoiseGenerator;
 
         public override void Build(IMap map, MapSettings settings)
         {
             // TODO: change parameters
-            var noise = new NormNoiseDecorator(m_NoiseGenerator).GenerateNoise((int)map.Width, (int)map.Height, new Random().Next(), 10);
+            //var noise = new NormNoiseDecorator(m_NoiseGenerator).GenerateNoise((int)map.Width, (int)map.Height, new Random().Next(), 10);
+            var noise = m_NoiseGenerator.GenerateNoise((int)map.Width, (int)map.Height, new Random().Next(), 10);
 
             var queue = new PriorityQueue<Corner>((a, b) => -a.DistanceFromCoast.CompareTo(b.DistanceFromCoast));
 

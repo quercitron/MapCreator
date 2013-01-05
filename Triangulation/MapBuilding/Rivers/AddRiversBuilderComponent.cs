@@ -26,7 +26,7 @@ namespace Triangulation.MapBuilding
 
                 List<Corner> riverSources = null;
 
-                for (int k = 0; k < 5000; k++)
+                for (int k = 0; k < 500; k++)
                 {
                     List<Corner> newSources = new List<Corner>();
 

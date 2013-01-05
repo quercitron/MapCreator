@@ -1,4 +1,4 @@
-﻿namespace Triangulation
+namespace MapCreatorUI
 {
     partial class MainForm
     {
@@ -32,9 +32,12 @@
             this.buttonAddRange = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBoxCoastLine = new System.Windows.Forms.CheckBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.checkBoxShowMoisture = new System.Windows.Forms.CheckBox();
+            this.checkBoxElevation = new System.Windows.Forms.CheckBox();
             this.checkBoxShowLakes = new System.Windows.Forms.CheckBox();
             this.checkBoxShowRivers = new System.Windows.Forms.CheckBox();
-            this.checkBoxElevation = new System.Windows.Forms.CheckBox();
             this.checkBoxCoast = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.checkBoxLinealBorders = new System.Windows.Forms.CheckBox();
@@ -50,18 +53,17 @@
             this.buttonSeed = new System.Windows.Forms.Button();
             this.nudAddCount = new System.Windows.Forms.NumericUpDown();
             this.buttonSave = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.checkBoxShowMoisture = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAddCount)).BeginInit();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonAddRandomPoint
             // 
             this.buttonAddRandomPoint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonAddRandomPoint.Enabled = false;
             this.buttonAddRandomPoint.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonAddRandomPoint.Location = new System.Drawing.Point(1272, 12);
             this.buttonAddRandomPoint.Name = "buttonAddRandomPoint";
@@ -96,6 +98,7 @@
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.checkBoxCoastLine);
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.checkBoxShowLakes);
             this.groupBox1.Controls.Add(this.checkBoxShowRivers);
@@ -107,17 +110,60 @@
             this.groupBox1.Controls.Add(this.checkBoxPoints);
             this.groupBox1.Location = new System.Drawing.Point(1272, 267);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(180, 321);
+            this.groupBox1.Size = new System.Drawing.Size(180, 346);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Show Options";
+            // 
+            // checkBoxCoastLine
+            // 
+            this.checkBoxCoastLine.AutoSize = true;
+            this.checkBoxCoastLine.Checked = true;
+            this.checkBoxCoastLine.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxCoastLine.Location = new System.Drawing.Point(7, 207);
+            this.checkBoxCoastLine.Name = "checkBoxCoastLine";
+            this.checkBoxCoastLine.Size = new System.Drawing.Size(69, 17);
+            this.checkBoxCoastLine.TabIndex = 202;
+            this.checkBoxCoastLine.Text = "Coastline";
+            this.checkBoxCoastLine.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.checkBoxShowMoisture);
+            this.groupBox3.Controls.Add(this.checkBoxElevation);
+            this.groupBox3.Location = new System.Drawing.Point(8, 230);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(166, 60);
+            this.groupBox3.TabIndex = 201;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Terrain Properties";
+            // 
+            // checkBoxShowMoisture
+            // 
+            this.checkBoxShowMoisture.AutoSize = true;
+            this.checkBoxShowMoisture.Location = new System.Drawing.Point(7, 40);
+            this.checkBoxShowMoisture.Name = "checkBoxShowMoisture";
+            this.checkBoxShowMoisture.Size = new System.Drawing.Size(96, 17);
+            this.checkBoxShowMoisture.TabIndex = 9;
+            this.checkBoxShowMoisture.Text = "Show Moisture";
+            this.checkBoxShowMoisture.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxElevation
+            // 
+            this.checkBoxElevation.AutoSize = true;
+            this.checkBoxElevation.Location = new System.Drawing.Point(7, 17);
+            this.checkBoxElevation.Name = "checkBoxElevation";
+            this.checkBoxElevation.Size = new System.Drawing.Size(100, 17);
+            this.checkBoxElevation.TabIndex = 8;
+            this.checkBoxElevation.Text = "Show Elevation";
+            this.checkBoxElevation.UseVisualStyleBackColor = true;
             // 
             // checkBoxShowLakes
             // 
             this.checkBoxShowLakes.AutoSize = true;
             this.checkBoxShowLakes.Checked = true;
             this.checkBoxShowLakes.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxShowLakes.Location = new System.Drawing.Point(7, 296);
+            this.checkBoxShowLakes.Location = new System.Drawing.Point(7, 319);
             this.checkBoxShowLakes.Name = "checkBoxShowLakes";
             this.checkBoxShowLakes.Size = new System.Drawing.Size(85, 17);
             this.checkBoxShowLakes.TabIndex = 10;
@@ -129,22 +175,12 @@
             this.checkBoxShowRivers.AutoSize = true;
             this.checkBoxShowRivers.Checked = true;
             this.checkBoxShowRivers.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxShowRivers.Location = new System.Drawing.Point(6, 273);
+            this.checkBoxShowRivers.Location = new System.Drawing.Point(6, 296);
             this.checkBoxShowRivers.Name = "checkBoxShowRivers";
             this.checkBoxShowRivers.Size = new System.Drawing.Size(86, 17);
             this.checkBoxShowRivers.TabIndex = 9;
             this.checkBoxShowRivers.Text = "Show Rivers";
             this.checkBoxShowRivers.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxElevation
-            // 
-            this.checkBoxElevation.AutoSize = true;
-            this.checkBoxElevation.Location = new System.Drawing.Point(7, 17);
-            this.checkBoxElevation.Name = "checkBoxElevation";
-            this.checkBoxElevation.Size = new System.Drawing.Size(100, 17);
-            this.checkBoxElevation.TabIndex = 8;
-            this.checkBoxElevation.Text = "Show Elevation";
-            this.checkBoxElevation.UseVisualStyleBackColor = true;
             // 
             // checkBoxCoast
             // 
@@ -214,6 +250,7 @@
             // checkBoxTriangles
             // 
             this.checkBoxTriangles.AutoSize = true;
+            this.checkBoxTriangles.Enabled = false;
             this.checkBoxTriangles.Location = new System.Drawing.Point(7, 44);
             this.checkBoxTriangles.Name = "checkBoxTriangles";
             this.checkBoxTriangles.Size = new System.Drawing.Size(69, 17);
@@ -224,8 +261,7 @@
             // checkBoxPoints
             // 
             this.checkBoxPoints.AutoSize = true;
-            this.checkBoxPoints.Checked = true;
-            this.checkBoxPoints.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxPoints.Enabled = false;
             this.checkBoxPoints.Location = new System.Drawing.Point(7, 20);
             this.checkBoxPoints.Name = "checkBoxPoints";
             this.checkBoxPoints.Size = new System.Drawing.Size(55, 17);
@@ -249,7 +285,8 @@
             // 
             this.checkBoxShowTimes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBoxShowTimes.AutoSize = true;
-            this.checkBoxShowTimes.Location = new System.Drawing.Point(1272, 594);
+            this.checkBoxShowTimes.Enabled = false;
+            this.checkBoxShowTimes.Location = new System.Drawing.Point(1272, 619);
             this.checkBoxShowTimes.Name = "checkBoxShowTimes";
             this.checkBoxShowTimes.Size = new System.Drawing.Size(84, 17);
             this.checkBoxShowTimes.TabIndex = 5;
@@ -280,6 +317,11 @@
             this.numericUpDownSeed.Name = "numericUpDownSeed";
             this.numericUpDownSeed.Size = new System.Drawing.Size(76, 20);
             this.numericUpDownSeed.TabIndex = 7;
+            this.numericUpDownSeed.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             this.numericUpDownSeed.ValueChanged += new System.EventHandler(this.NumericUpDownSeedValueChanged);
             // 
             // buttonSeed
@@ -316,34 +358,13 @@
             // 
             this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonSave.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonSave.Location = new System.Drawing.Point(1272, 617);
+            this.buttonSave.Location = new System.Drawing.Point(1272, 642);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(180, 45);
             this.buttonSave.TabIndex = 10;
             this.buttonSave.Text = "Save Map";
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.ButtonSaveClick);
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.checkBoxShowMoisture);
-            this.groupBox3.Controls.Add(this.checkBoxElevation);
-            this.groupBox3.Location = new System.Drawing.Point(8, 207);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(166, 60);
-            this.groupBox3.TabIndex = 201;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "groupBox3";
-            // 
-            // checkBoxShowMoisture
-            // 
-            this.checkBoxShowMoisture.AutoSize = true;
-            this.checkBoxShowMoisture.Location = new System.Drawing.Point(7, 40);
-            this.checkBoxShowMoisture.Name = "checkBoxShowMoisture";
-            this.checkBoxShowMoisture.Size = new System.Drawing.Size(96, 17);
-            this.checkBoxShowMoisture.TabIndex = 9;
-            this.checkBoxShowMoisture.Text = "Show Moisture";
-            this.checkBoxShowMoisture.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -363,14 +384,15 @@
             this.Controls.Add(this.buttonAddRandomPoint);
             this.Name = "MainForm";
             this.Text = "Map Creator";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAddCount)).EndInit();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -402,6 +424,7 @@
         private System.Windows.Forms.CheckBox checkBoxShowLakes;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.CheckBox checkBoxShowMoisture;
+        private System.Windows.Forms.CheckBox checkBoxCoastLine;
     }
 }
 
