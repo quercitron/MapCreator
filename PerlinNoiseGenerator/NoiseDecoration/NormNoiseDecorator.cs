@@ -22,10 +22,10 @@ namespace PerlinNoiseGeneration
         {
             double minNoise = 1;
             double maxNoise = 0;
-            foreach (double d in noise)
+            foreach (var value in noise)
             {
-                minNoise = Math.Min(minNoise, d);
-                maxNoise = Math.Max(maxNoise, d);
+                minNoise = Math.Min(minNoise, value);
+                maxNoise = Math.Max(maxNoise, value);
             }
 
             for (int i = 0; i < noise.GetLength(0); i++)

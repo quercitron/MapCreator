@@ -7,7 +7,7 @@ namespace PerlinNoiseGeneration
             this.m_Generator = generator;
         }
 
-        private INoiseGenerator m_Generator;
+        private readonly INoiseGenerator m_Generator;
 
         public virtual double[,] GenerateNoise(int width, int height, int seed, double frequency)
         {

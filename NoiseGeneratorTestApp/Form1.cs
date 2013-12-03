@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-
+using MapGenerator.Utils;
 using PerlinNoiseGeneration;
 using Triangulation.Algorithm.GeometryBase;
 using Triangulation.Algorithm.Sorting;
@@ -15,33 +12,74 @@ namespace NoiseGeneratorTestApp
 {
     public partial class Form1 : Form
     {
-        private readonly PerlinNoiseGenerator m_Generator;
         private readonly Random m_Rnd;
 
         private Bitmap m_Bitmap;
-        private readonly int m_Width = 800;
-        private readonly int m_Height = 600;
+        //private readonly int m_Width = 800;
+        //private readonly int m_Height = 600;
+        private readonly int m_Width = 1920;
+        private readonly int m_Height = 1080;
+        private readonly Saver m_Saver = new Saver("Image");
+        private int m_Seed;
 
         public Form1()
         {
             InitializeComponent();
-            m_Generator = new PerlinNoiseGenerator();
             m_Rnd = new Random(1);
         }
 
         private void ButtonGenerateClick(object sender, EventArgs e)
         {
-            int seed;
             int frequency;
-            if (int.TryParse(textBoxSeed.Text, out seed) && int.TryParse(textBoxFrequency.Text, out frequency))
+            if (int.TryParse(textBoxSeed.Text, out m_Seed) && int.TryParse(textBoxFrequency.Text, out frequency))
             {
-                var noise = m_Generator.GenerateNoise(m_Width, m_Height, seed, frequency);
+                INoiseGenerator generator = new PerlinNoiseGenerator();
+
+                if (cbNormalize.Checked)
+                {
+                    generator = new NormNoiseDecorator(generator);
+                }
+
+                if (cbPolarize.Checked)
+                {
+                    generator = new SlowedHeightIncreaseNoiseDecorator(generator);
+                }
+
+                var noise = generator.GenerateNoise(m_Width, m_Height, m_Seed, frequency);
+
+                var values = new List<double>();
+                foreach (var value in noise)
+                {
+                    values.Add(value);
+                }
+                values.Sort();
+
+                for (int i = 0; i < values.Count - 1; i++)
+                {
+                    if (values[i + 1] - values[i] > 0.001)
+                    {
+                        
+                    }
+                }
+
                 this.m_Bitmap = new Bitmap(m_Width, m_Height);
                 for (int i = 0; i < m_Width; i++)
                 {
                     for (int j = 0; j < m_Height; j++)
                     {
-                        this.m_Bitmap.SetPixel(i, j, Color.FromArgb(255, (int)(255 * noise[i,j]), (int)(255 * (1 - noise[i,j])), 0));
+                        //var botColor = new MyColor(Color.FromArgb(255, 0, 255, 0));
+                        //var botColor = new MyColor(Color.White);
+                        //var topColor = new MyColor(Color.Black);
+                        MyColor color;// = topColor * noise[i, j] + botColor * (1 - noise[i, j]);
+                        if (noise[i, j] > 0.65)
+                        {
+                            color = new MyColor(Color.Wheat);
+                        }
+                        else
+                        {
+                            color = new MyColor(Color.White);
+                        }
+                        this.m_Bitmap.SetPixel(i, j, (Color) color);
                     }
                 }
             }
@@ -154,6 +192,14 @@ namespace NoiseGeneratorTestApp
             }
 
             this.Refresh();
+        }
+
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            if (m_Bitmap != null)
+            {
+                m_Saver.SaveBitmap(m_Bitmap, m_Seed);
+            }
         }
     }
 }

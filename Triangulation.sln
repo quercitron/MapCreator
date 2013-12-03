@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoiseGeneratorTestApp", "No
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapCreatorUI", "MapCreatorUI\MapCreatorUI.csproj", "{5252EAB8-DF14-4ED0-BB9B-E9745EC69DAD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapGenerator.Utils", "MapGenerator.Utils\MapGenerator.Utils.csproj", "{FD60C489-C082-4ADB-920E-648804357EA5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,16 @@ Global
 		{5252EAB8-DF14-4ED0-BB9B-E9745EC69DAD}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{5252EAB8-DF14-4ED0-BB9B-E9745EC69DAD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{5252EAB8-DF14-4ED0-BB9B-E9745EC69DAD}.Release|x86.ActiveCfg = Release|Any CPU
+		{FD60C489-C082-4ADB-920E-648804357EA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD60C489-C082-4ADB-920E-648804357EA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD60C489-C082-4ADB-920E-648804357EA5}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FD60C489-C082-4ADB-920E-648804357EA5}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FD60C489-C082-4ADB-920E-648804357EA5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FD60C489-C082-4ADB-920E-648804357EA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD60C489-C082-4ADB-920E-648804357EA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD60C489-C082-4ADB-920E-648804357EA5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FD60C489-C082-4ADB-920E-648804357EA5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{FD60C489-C082-4ADB-920E-648804357EA5}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,8 +1,8 @@
 ﻿namespace PerlinNoiseGeneration
 {
-    public class PolarizeNoiseDecorator : NoiseDecorator
+    public class SlowedHeightIncreaseNoiseDecorator : NoiseDecorator
     {
-        public PolarizeNoiseDecorator(INoiseGenerator generator)
+        public SlowedHeightIncreaseNoiseDecorator(INoiseGenerator generator)
             : base(generator)
         {
         }
