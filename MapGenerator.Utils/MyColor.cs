@@ -1,8 +1,8 @@
-﻿using System.Drawing;
+using System.Drawing;
 
-namespace Triangulation
+namespace MapGenerator.Utils
 {
-    class MyColor
+    public class MyColor
     {
         public MyColor(double a, double r, double g, double b)
         {

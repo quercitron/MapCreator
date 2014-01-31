@@ -90,6 +90,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MapGenerator.Utils\MapGenerator.Utils.csproj">
+      <Project>{fd60c489-c082-4adb-920e-648804357ea5}</Project>
+      <Name>MapGenerator.Utils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PerlinNoiseGenerator\PerlinNoiseGeneration.csproj">
       <Project>{5CA54CD5-E89B-4A9F-8C61-3F3E7F162715}</Project>
       <Name>PerlinNoiseGeneration</Name>

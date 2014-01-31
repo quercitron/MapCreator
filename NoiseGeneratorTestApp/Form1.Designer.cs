@@ -33,6 +33,11 @@
             this.buttonGenerate = new System.Windows.Forms.Button();
             this.textBoxFrequency = new System.Windows.Forms.TextBox();
             this.buttonTestSort = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbPolarize = new System.Windows.Forms.CheckBox();
+            this.cbNormalize = new System.Windows.Forms.CheckBox();
+            this.buttonSave = new System.Windows.Forms.Button();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBoxSeed
@@ -46,7 +51,7 @@
             // 
             // buttonNextRandom
             // 
-            this.buttonNextRandom.Location = new System.Drawing.Point(710, 680);
+            this.buttonNextRandom.Location = new System.Drawing.Point(897, 651);
             this.buttonNextRandom.Name = "buttonNextRandom";
             this.buttonNextRandom.Size = new System.Drawing.Size(75, 23);
             this.buttonNextRandom.TabIndex = 1;
@@ -66,7 +71,7 @@
             // 
             // textBoxFrequency
             // 
-            this.textBoxFrequency.Location = new System.Drawing.Point(791, 656);
+            this.textBoxFrequency.Location = new System.Drawing.Point(791, 654);
             this.textBoxFrequency.Name = "textBoxFrequency";
             this.textBoxFrequency.Size = new System.Drawing.Size(100, 20);
             this.textBoxFrequency.TabIndex = 3;
@@ -84,11 +89,54 @@
             this.buttonTestSort.UseVisualStyleBackColor = true;
             this.buttonTestSort.Click += new System.EventHandler(this.buttonTestSort_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.cbPolarize);
+            this.groupBox1.Controls.Add(this.cbNormalize);
+            this.groupBox1.Location = new System.Drawing.Point(504, 641);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(200, 62);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Decorators";
+            // 
+            // cbPolarize
+            // 
+            this.cbPolarize.AutoSize = true;
+            this.cbPolarize.Location = new System.Drawing.Point(7, 39);
+            this.cbPolarize.Name = "cbPolarize";
+            this.cbPolarize.Size = new System.Drawing.Size(63, 17);
+            this.cbPolarize.TabIndex = 1;
+            this.cbPolarize.Text = "Polarize";
+            this.cbPolarize.UseVisualStyleBackColor = true;
+            // 
+            // cbNormalize
+            // 
+            this.cbNormalize.AutoSize = true;
+            this.cbNormalize.Location = new System.Drawing.Point(7, 18);
+            this.cbNormalize.Name = "cbNormalize";
+            this.cbNormalize.Size = new System.Drawing.Size(72, 17);
+            this.cbNormalize.TabIndex = 0;
+            this.cbNormalize.Text = "Normalize";
+            this.cbNormalize.UseVisualStyleBackColor = true;
+            // 
+            // buttonSave
+            // 
+            this.buttonSave.Location = new System.Drawing.Point(710, 680);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonSave.TabIndex = 6;
+            this.buttonSave.Text = "Save";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 712);
+            this.Controls.Add(this.buttonSave);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonTestSort);
             this.Controls.Add(this.textBoxFrequency);
             this.Controls.Add(this.buttonGenerate);
@@ -97,6 +145,8 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1Paint);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -109,6 +159,10 @@
         private System.Windows.Forms.Button buttonGenerate;
         private System.Windows.Forms.TextBox textBoxFrequency;
         private System.Windows.Forms.Button buttonTestSort;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.CheckBox cbPolarize;
+        private System.Windows.Forms.CheckBox cbNormalize;
+        private System.Windows.Forms.Button buttonSave;
     }
 }
 

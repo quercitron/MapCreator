@@ -61,7 +61,7 @@ namespace Triangulation.MapBuilding
                 }
             }*/
 
-            var noise = new PolarizeNoiseDecorator(new NormNoiseDecorator(m_NoiseGenerator)).GenerateNoise((int)map.Width, (int)map.Height, m_Random.Next(), 4);
+            var noise = new NormNoiseDecorator(m_NoiseGenerator).GenerateNoise((int)map.Width, (int)map.Height, m_Random.Next(), 4);
 
             /*foreach (var corner in map.Corners)
             {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Threading;
-
+using MapGenerator.Utils;
 using Triangulation.Algorithm.GeometryBase;
 using Triangulation.Dividing;
 using Triangulation.MapObjects;
@@ -33,6 +33,8 @@ namespace Triangulation
         private readonly IMapFactory m_MapFactory = new MapFactory();
 
         private readonly IMapPainter m_MapPainter = new CommonMapPainter();
+
+        private Saver m_Saver = new Saver("Images");
 
         public DrawSettings DrawSettings { get; set; }
 
@@ -96,29 +98,7 @@ namespace Triangulation
 
         public void SaveMapImage()
         {
-            var dirPath = "Images";
-
-            if (!Directory.Exists(dirPath))
-            {
-                Directory.CreateDirectory(dirPath);
-            }
-
-            var imageName = string.Format("Map_{0}x{1}_{2}", Bitmap.Width, Bitmap.Height, Seed);
-
-            if (File.Exists(Path.Combine(dirPath, imageName + ".bmp")))
-            {
-                for (int i = 2; ; i++)
-                {
-                    var newImageName = string.Format("{0}_{1}", imageName, i);
-                    if (!File.Exists(Path.Combine(dirPath, newImageName + ".bmp")))
-                    {
-                        imageName = newImageName;
-                        break;
-                    }
-                }
-            }
-
-            Bitmap.Save(Path.Combine(dirPath, imageName + ".bmp"));
+            m_Saver.SaveBitmap(Bitmap, Seed);
         }
 
         private void UpdateMap()
