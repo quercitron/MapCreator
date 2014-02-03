@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 using Triangulation.Algorithm.GeometryBase;
@@ -9,81 +9,59 @@ namespace Triangulation.Dividing
 {
     public class Structure
     {
-        private static readonly Random Rnd = new Random();
-        private readonly Queue<Triangle> m_TrianglesToCheck = new Queue<Triangle>();
-
-        public EventHandler StructureChanged;
-        private TriangleHash m_Hash;
-
         public Structure(double maxX, double maxY)
         {
-            Triangles = new List<Triangle>();
-            Points = new List<StructurePoint>();
+            _triangles = new List<Triangle>();
+            _points = new List<StructurePoint>();
 
             Width = maxX;
             Height = maxY;
 
-            CreateBoard(maxX, maxY);
+            InitializeBoard(maxX, maxY);
         }
-
-        public List<Triangle> Triangles { get; set; }
-
-        public List<StructurePoint> Points { get; set; }
-
-        public long LastActionLength { get; private set; }
-
-        public long LandCreation { get; private set; }
-
-        public long MapBuilding { get; private set; }        
 
         public double Width { get; private set; }
 
         public double Height { get; private set; }
 
+        public ReadOnlyCollection<Triangle> Triangles
+        {
+            get { return _triangles.AsReadOnly(); }
+        }
+
+        public ReadOnlyCollection<StructurePoint> Points
+        {
+            get { return _points.AsReadOnly(); }
+        }
+
         public void AddPoint(Point2D point)
         {
-            var stopwatch = new Stopwatch();
-
-            stopwatch.Start();
-
             AddNewPoint(point);
-
-            stopwatch.Stop();
-
-            LastActionLength = stopwatch.ElapsedMilliseconds;
-
-            if (StructureChanged != null)
-            {
-                StructureChanged(this, new EventArgs());
-            }
         }
 
         public void AddPointRange(IEnumerable<Point2D> points)
         {
-            var stopwatch = new Stopwatch();
-
-            stopwatch.Start();
-
-            foreach (Point2D point in points)
+            foreach (var point in points)
             {
                 AddNewPoint(point);
             }
-
-            stopwatch.Stop();
-
-            LastActionLength = stopwatch.ElapsedMilliseconds;
-
-            if (StructureChanged != null)
-            {
-                StructureChanged(this, new EventArgs());
-            }
         }
+
+        private static readonly Random Rnd = new Random();
+
+        private readonly Queue<Triangle> m_TrianglesToCheck = new Queue<Triangle>();
+
+        private TriangleHash m_Hash;
+
+        private readonly List<Triangle> _triangles;
+
+        private List<StructurePoint> _points;
 
         private void AddNewPoint(Point2D newPoint)
         {
             var point = new StructurePoint(newPoint);
 
-            Points.Add(point);
+            _points.Add(point);
 
             Triangle triangle = SearchTriangle(point);
 
@@ -155,9 +133,7 @@ namespace Triangulation.Dividing
                             }
                         }
 
-                        if (
-                            !Ok(current.Points[i], current.Points[(i + 1) % 3], opPoint,
-                                current.Points[(i + 2) % 3]))
+                        if (!Ok(current.Points[i], current.Points[(i + 1) % 3], opPoint, current.Points[(i + 2) % 3]))
                         {
                             Triangle tempTriangle = current.Triangles[(i + 2) % 3];
 
@@ -186,11 +162,9 @@ namespace Triangulation.Dividing
 
         private Triangle SearchTriangle(Point2D point)
         {
-            /*Triangle current = Triangles[Rnd.Next(Triangles.Count)];*/
+            var current = m_Hash.GetTriangle(point);
 
-            Triangle current = m_Hash.GetTriangle(point);
-
-            while (!current.Contain(point))
+            while (!current.ContainsPoint(point))
             {
                 current = GetNext(current, point);
             }
@@ -218,7 +192,7 @@ namespace Triangulation.Dividing
             throw new ApplicationException("Coudn't find next Triangle.");
         }
 
-        private void CreateBoard(double maxX, double maxY)
+        private void InitializeBoard(double maxX, double maxY)
         {
             const int border = 10000;
             var lb = new StructurePoint(-border, -border) {IsDummy = true};
@@ -226,7 +200,7 @@ namespace Triangulation.Dividing
             var rb = new StructurePoint(maxX + border, -border) {IsDummy = true};
             var rt = new StructurePoint(maxX + border, maxY + border) {IsDummy = true};
 
-            Points.AddRange(new[] {lb, lt, rb, rt});
+            _points.AddRange(new[] {lb, lt, rb, rt});
 
             var top = new Triangle();
             var bottom = new Triangle();
@@ -245,8 +219,8 @@ namespace Triangulation.Dividing
 
         private void AddTriangle(Triangle triangle)
         {
-            triangle.Id = Triangles.Count();
-            Triangles.Add(triangle);
+            triangle.Id = _triangles.Count();
+            _triangles.Add(triangle);
         }
     }
 }

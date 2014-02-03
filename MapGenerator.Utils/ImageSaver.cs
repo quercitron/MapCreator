@@ -3,9 +3,9 @@ using System.IO;
 
 namespace MapGenerator.Utils
 {
-    public class Saver
+    public class ImageSaver
     {
-        public Saver(string path)
+        public ImageSaver(string path)
         {
             m_Path = path;
 
@@ -17,9 +17,9 @@ namespace MapGenerator.Utils
 
         private readonly string m_Path;
 
-        public void SaveBitmap(Bitmap bitmap, int seed)
+        public void SaveBitmap(Image image, int seed)
         {
-            var imageName = string.Format("Map_{0}x{1}_{2}", bitmap.Width, bitmap.Height, seed);
+            var imageName = string.Format("Map_{0}x{1}_{2}", image.Width, image.Height, seed);
 
             if (File.Exists(Path.Combine(m_Path, imageName + ".bmp")))
             {
@@ -34,7 +34,7 @@ namespace MapGenerator.Utils
                 }
             }
 
-            bitmap.Save(Path.Combine(m_Path, imageName + ".bmp"));
+            image.Save(Path.Combine(m_Path, imageName + ".bmp"));
         }
     }
 }

@@ -34,7 +34,7 @@ namespace Triangulation
 
         private readonly IMapPainter m_MapPainter = new CommonMapPainter();
 
-        private Saver m_Saver = new Saver("Images");
+        private ImageSaver _imageSaver = new ImageSaver("Images");
 
         public DrawSettings DrawSettings { get; set; }
 
@@ -98,7 +98,7 @@ namespace Triangulation
 
         public void SaveMapImage()
         {
-            m_Saver.SaveBitmap(Bitmap, Seed);
+            _imageSaver.SaveBitmap(Bitmap, Seed);
         }
 
         private void UpdateMap()

@@ -35,7 +35,7 @@ namespace Triangulation.Dividing
             }
         }
 
-        public bool Contain(Point2D point)
+        public bool ContainsPoint(Point2D point)
         {
             double[] vects = new double[3];
 

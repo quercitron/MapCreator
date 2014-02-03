@@ -19,7 +19,7 @@ namespace NoiseGeneratorTestApp
         //private readonly int m_Height = 600;
         private readonly int m_Width = 1920;
         private readonly int m_Height = 1080;
-        private readonly Saver m_Saver = new Saver("Image");
+        private readonly ImageSaver _imageSaver = new ImageSaver("Image");
         private int m_Seed;
 
         public Form1()
@@ -198,7 +198,7 @@ namespace NoiseGeneratorTestApp
         {
             if (m_Bitmap != null)
             {
-                m_Saver.SaveBitmap(m_Bitmap, m_Seed);
+                _imageSaver.SaveBitmap(m_Bitmap, m_Seed);
             }
         }
     }
