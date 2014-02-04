@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 
-using Triangulation.Algorithm.GeometryBase;
+using GeneralAlgorithms.GeometryBase;
+
 using Triangulation.MapObjects;
 
-namespace Triangulation.MapBuilding
+namespace Triangulation.MapBuilding.Rivers
 {
     internal class CommonAddRiverStrategy : IAddRiverStrategy
     {

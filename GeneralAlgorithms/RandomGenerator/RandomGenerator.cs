@@ -1,4 +1,4 @@
-﻿namespace Triangulation.Algorithm.RandomGenerator
+namespace GeneralAlgorithms.RandomGenerator
 {
     abstract class BaseRandomGenerator : IRandomGenerator
     {
@@ -8,19 +8,19 @@
 
         public int Next(int minValue, int maxValue)
         {
-            return minValue + this.Next(maxValue - minValue);
+            return minValue + Next(maxValue - minValue);
         }
 
         public abstract double NextDouble();
 
         public double NextDouble(double maxValue)
         {
-            return this.NextDouble() * maxValue;
+            return NextDouble() * maxValue;
         }
 
         public double NextDouble(double minValue, double maxValue)
         {
-            return minValue + this.NextDouble() * (maxValue - minValue);
+            return minValue + NextDouble() * (maxValue - minValue);
         }
     }
 }

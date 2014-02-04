@@ -1,8 +1,8 @@
 using System;
 
-using Triangulation.Algorithm.GeometryBase;
+using GeneralAlgorithms.GeometryBase;
 
-namespace Triangulation.Dividing
+namespace IncrementalDelaunayTriangulation
 {
     public class TriangleHash
     {

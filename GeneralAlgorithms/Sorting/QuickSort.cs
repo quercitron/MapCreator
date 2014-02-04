@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
-namespace Triangulation.Algorithm.Sorting
+namespace GeneralAlgorithms.Sorting
 {
     public static class Sort
     {

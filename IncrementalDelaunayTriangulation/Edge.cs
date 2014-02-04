@@ -1,4 +1,4 @@
-namespace Triangulation.Dividing
+namespace IncrementalDelaunayTriangulation
 {
     public class Edge
     {
@@ -9,6 +9,7 @@ namespace Triangulation.Dividing
         }
 
         public StructurePoint First { get; set; }
+
         public StructurePoint Second { get; set; }
     }
 }

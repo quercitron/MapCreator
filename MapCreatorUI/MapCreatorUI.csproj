@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MapCreatorUI</RootNamespace>
     <AssemblyName>MapCreatorUI</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -80,6 +80,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GeneralAlgorithms\GeneralAlgorithms.csproj">
+      <Project>{3a9a126d-2750-43b8-a66e-b56cd4b3415e}</Project>
+      <Name>GeneralAlgorithms</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Triangulation\Triangulation.csproj">
       <Project>{7eac14ef-9095-4bfa-a557-dde222836bae}</Project>
       <Name>Triangulation</Name>

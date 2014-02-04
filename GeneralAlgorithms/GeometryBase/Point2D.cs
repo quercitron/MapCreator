@@ -1,7 +1,7 @@
 using System;
 using System.Drawing;
 
-namespace Triangulation.Algorithm.GeometryBase
+namespace GeneralAlgorithms.GeometryBase
 {
     public class Point2D
     {
@@ -17,16 +17,17 @@ namespace Triangulation.Algorithm.GeometryBase
         }
 
         public double X { get; set; }
+
         public double Y { get; set; }
 
         public double Length
         {
-            get { return Math.Sqrt(X * X + Y * Y); }           
+            get { return Math.Sqrt(X * X + Y * Y); }
         }
 
         public static explicit operator Point(Point2D point2D)
         {
-            return new Point((int) point2D.X, (int) point2D.Y);
+            return new Point((int)point2D.X, (int)point2D.Y);
         }
 
         public static implicit operator Point2D(Point point)
@@ -36,7 +37,7 @@ namespace Triangulation.Algorithm.GeometryBase
 
         public static explicit operator PointF(Point2D point2D)
         {
-            return new PointF((float) point2D.X, (float)point2D.Y);
+            return new PointF((float)point2D.X, (float)point2D.Y);
         }
 
         public static implicit operator Point2D(PointF point)

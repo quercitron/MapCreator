@@ -2,7 +2,7 @@
 
 using Triangulation.MapObjects;
 
-namespace Triangulation.MapBuilding
+namespace Triangulation.MapBuilding.Lakes
 {
     internal class StructureLakes : IMapBuilderComponent
     {

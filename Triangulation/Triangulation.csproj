@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Triangulation</RootNamespace>
     <AssemblyName>Triangulation</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -62,17 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Algorithm\GeometryBase\Geometry.cs" />
-    <Compile Include="Algorithm\GeometryBase\Point2D.cs" />
-    <Compile Include="Algorithm\GeometryBase\PointInt.cs" />
-    <Compile Include="Algorithm\RandomGenerator\DefaultRandomGenerator.cs" />
-    <Compile Include="Algorithm\RandomGenerator\IRandom.cs" />
-    <Compile Include="Algorithm\PriorityQueue\IPriorityQueue.cs" />
-    <Compile Include="Algorithm\PriorityQueue\PriorityQueue.cs" />
-    <Compile Include="Algorithm\RandomGenerator\RandomGenerator.cs" />
-    <Compile Include="Algorithm\Sorting\QuickSort.cs" />
     <Compile Include="CompositeMapCreator.cs" />
-    <Compile Include="Dividing\Edge.cs" />
     <Compile Include="IMapFactory.cs" />
     <Compile Include="INoiseLineGenerator.cs" />
     <Compile Include="MapBuilding\AssignCoastBuilderComponent.cs" />
@@ -88,6 +78,9 @@
     <Compile Include="MapBuilding\LandGenerators\SkeletonLandGenerator.cs" />
     <Compile Include="MapBuilding\Moisture\MoistureGenerator.cs" />
     <Compile Include="MapBuilding\Polygons\FormPolygons.cs" />
+    <Compile Include="MapBuilding\Polygons\MapEdge.cs" />
+    <Compile Include="MapBuilding\Polygons\MapPoint.cs" />
+    <Compile Include="MapBuilding\Polygons\MapTriangle.cs" />
     <Compile Include="MapBuilding\Rivers\AddRiversBuilderComponent.cs" />
     <Compile Include="MapBuilding\Rivers\BaseRivers.cs" />
     <Compile Include="MapBuilding\Rivers\CommonAddRiverStrategy.cs" />
@@ -113,10 +106,6 @@
     <Compile Include="NoiseLineGenerator.cs" />
     <Compile Include="RandomImproved.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Dividing\Structure.cs" />
-    <Compile Include="Dividing\StructurePoint.cs" />
-    <Compile Include="Dividing\Triangle.cs" />
-    <Compile Include="Dividing\TriangleHash.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -140,9 +129,17 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\MapGenerator.Utils\MapGenerator.Utils.csproj">
+    <ProjectReference Include="..\GeneralAlgorithms\GeneralAlgorithms.csproj">
+      <Project>{3a9a126d-2750-43b8-a66e-b56cd4b3415e}</Project>
+      <Name>GeneralAlgorithms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IncrementalDelaunayTriangulation\IncrementalDelaunayTriangulation.csproj">
+      <Project>{1c22ee00-9968-49b4-b59f-3acac50eb80a}</Project>
+      <Name>IncrementalDelaunayTriangulation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MapGenerator.Utils\MapCreator.Utils.csproj">
       <Project>{fd60c489-c082-4adb-920e-648804357ea5}</Project>
-      <Name>MapGenerator.Utils</Name>
+      <Name>MapCreator.Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\PerlinNoiseGenerator\PerlinNoiseGeneration.csproj">
       <Project>{5CA54CD5-E89B-4A9F-8C61-3F3E7F162715}</Project>

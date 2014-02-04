@@ -3,7 +3,7 @@ using System.Linq;
 
 using Triangulation.MapObjects;
 
-namespace Triangulation.MapBuilding
+namespace Triangulation.MapBuilding.Elevation
 {
     internal abstract class BaseElevationGenerator : IMapBuilderComponent
     {

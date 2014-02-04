@@ -2,7 +2,7 @@ using System.Linq;
 
 using Triangulation.MapObjects;
 
-namespace Triangulation.MapBuilding
+namespace Triangulation.MapBuilding.TerranType
 {
     internal class SetTerranTypeFromSite : IMapBuilderComponent
     {

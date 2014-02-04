@@ -9,7 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoiseGeneratorTestApp", "No
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapCreatorUI", "MapCreatorUI\MapCreatorUI.csproj", "{5252EAB8-DF14-4ED0-BB9B-E9745EC69DAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapGenerator.Utils", "MapGenerator.Utils\MapGenerator.Utils.csproj", "{FD60C489-C082-4ADB-920E-648804357EA5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapCreator.Utils", "MapGenerator.Utils\MapCreator.Utils.csproj", "{FD60C489-C082-4ADB-920E-648804357EA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IncrementalDelaunayTriangulation", "IncrementalDelaunayTriangulation\IncrementalDelaunayTriangulation.csproj", "{1C22EE00-9968-49B4-B59F-3ACAC50EB80A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneralAlgorithms", "GeneralAlgorithms\GeneralAlgorithms.csproj", "{3A9A126D-2750-43B8-A66E-B56CD4B3415E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +79,26 @@ Global
 		{FD60C489-C082-4ADB-920E-648804357EA5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{FD60C489-C082-4ADB-920E-648804357EA5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{FD60C489-C082-4ADB-920E-648804357EA5}.Release|x86.ActiveCfg = Release|Any CPU
+		{1C22EE00-9968-49B4-B59F-3ACAC50EB80A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C22EE00-9968-49B4-B59F-3ACAC50EB80A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C22EE00-9968-49B4-B59F-3ACAC50EB80A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{1C22EE00-9968-49B4-B59F-3ACAC50EB80A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{1C22EE00-9968-49B4-B59F-3ACAC50EB80A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1C22EE00-9968-49B4-B59F-3ACAC50EB80A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C22EE00-9968-49B4-B59F-3ACAC50EB80A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C22EE00-9968-49B4-B59F-3ACAC50EB80A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1C22EE00-9968-49B4-B59F-3ACAC50EB80A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{1C22EE00-9968-49B4-B59F-3ACAC50EB80A}.Release|x86.ActiveCfg = Release|Any CPU
+		{3A9A126D-2750-43B8-A66E-B56CD4B3415E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A9A126D-2750-43B8-A66E-B56CD4B3415E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A9A126D-2750-43B8-A66E-B56CD4B3415E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3A9A126D-2750-43B8-A66E-B56CD4B3415E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3A9A126D-2750-43B8-A66E-B56CD4B3415E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3A9A126D-2750-43B8-A66E-B56CD4B3415E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A9A126D-2750-43B8-A66E-B56CD4B3415E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A9A126D-2750-43B8-A66E-B56CD4B3415E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3A9A126D-2750-43B8-A66E-B56CD4B3415E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{3A9A126D-2750-43B8-A66E-B56CD4B3415E}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

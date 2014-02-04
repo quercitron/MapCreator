@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using Triangulation.Algorithm.GeometryBase;
+using GeneralAlgorithms.GeometryBase;
 
 namespace Triangulation.MapObjects
 {
@@ -22,7 +22,9 @@ namespace Triangulation.MapObjects
         }
 
         public List<Polygon> Polygons { get; set; }
+
         public List<Corner> Corners { get; set; }
+
         public List<Border> Borders { get; set; }
 
         public List<Point2D> CornersToDraw { get; set; }
@@ -35,16 +37,15 @@ namespace Triangulation.MapObjects
 
         public Point2D Center
         {
-            get
-            {
-                return new Point2D(Corners.Average(p => p.X), Corners.Average(p => p.Y));
-            }
+            get { return new Point2D(Corners.Average(p => p.X), Corners.Average(p => p.Y)); }
         }
 
         public bool IsOceanCoast { get; set; }
+
         public bool IsLakeCoast { get; set; }
 
         public bool IsOcean { get; set; }
+
         public bool IsLake
         {
             get { return !(IsLand || IsOcean); }
@@ -53,6 +54,7 @@ namespace Triangulation.MapObjects
         public int DistanceFromEdge { get; set; }
 
         public bool InSkeleton { get; set; }
+
         public int DistanceFromSkeleton { get; set; }
 
         public double Elevation
@@ -71,7 +73,7 @@ namespace Triangulation.MapObjects
 
         public bool IsWater
         {
-            get { return IsOcean || IsLake; }          
+            get { return IsOcean || IsLake; }
         }
 
         public TerrainType Type { get; set; }

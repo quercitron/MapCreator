@@ -1,15 +1,15 @@
-﻿using System;
+using System;
 
-namespace Triangulation.Algorithm.RandomGenerator
+namespace GeneralAlgorithms.RandomGenerator
 {
     class DefaultRandomGenerator : BaseRandomGenerator
     {
+        private readonly Random m_DefaultBaseGenerator;
+
         public DefaultRandomGenerator()
         {
             m_DefaultBaseGenerator = new Random();
         }
-
-        private readonly Random m_DefaultBaseGenerator;
 
         public override int Next()
         {

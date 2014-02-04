@@ -3,7 +3,7 @@ using System.Linq;
 
 using Triangulation.MapObjects;
 
-namespace Triangulation.MapBuilding
+namespace Triangulation.MapBuilding.Rivers
 {
     internal abstract class BaseRivers : IMapBuilderComponent
     {

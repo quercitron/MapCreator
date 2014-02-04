@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Triangulation.Algorithm.PriorityQueue
+namespace GeneralAlgorithms.PriorityQueue
 {
     public class PriorityQueue<T> : IPriorityQueue<T>
     {
@@ -36,9 +36,9 @@ namespace Triangulation.Algorithm.PriorityQueue
             }
 
             m_List.Add(item);
-            m_Indexes.Add(item, this.Count + 1);
-            this.Count++;
-            Up(this.Count);
+            m_Indexes.Add(item, Count + 1);
+            Count++;
+            Up(Count);
         }
 
         public T Peek()
@@ -48,15 +48,15 @@ namespace Triangulation.Algorithm.PriorityQueue
 
         public T Dequeue()
         {
-            if (this.Count > 0)
+            if (Count > 0)
             {
                 var result = m_List[0];
 
                 Swap(0, m_List.Count - 1);
                 m_Indexes.Remove(m_List[m_List.Count - 1]);
-                m_List.RemoveAt(this.Count - 1);                
-                this.Count--;
-                this.Down(1);
+                m_List.RemoveAt(Count - 1);
+                Count--;
+                Down(1);
 
                 return result;
             }
@@ -79,7 +79,7 @@ namespace Triangulation.Algorithm.PriorityQueue
         {
             while (index > 1 && m_Comparison.Invoke(m_List[index - 1], m_List[index / 2 - 1]) > 0)
             {
-                this.Swap(index - 1, index / 2 - 1);
+                Swap(index - 1, index / 2 - 1);
 
                 index = index / 2;
             }
@@ -87,17 +87,17 @@ namespace Triangulation.Algorithm.PriorityQueue
 
         private void Down(int index)
         {
-            while (2 * index <= this.Count && m_Comparison.Invoke(m_List[index - 1], m_List[2 * index - 1]) < 0 ||
-                   2 * index + 1 <= this.Count && m_Comparison.Invoke(m_List[index - 1], m_List[2 * index]) < 0)
+            while (2 * index <= Count && m_Comparison.Invoke(m_List[index - 1], m_List[2 * index - 1]) < 0 ||
+                   2 * index + 1 <= Count && m_Comparison.Invoke(m_List[index - 1], m_List[2 * index]) < 0)
             {
-                if (2 * index + 1 > this.Count || m_Comparison.Invoke(m_List[2 * index - 1], m_List[2 * index]) > 0)
+                if (2 * index + 1 > Count || m_Comparison.Invoke(m_List[2 * index - 1], m_List[2 * index]) > 0)
                 {
-                    this.Swap(index - 1, 2 * index - 1);
+                    Swap(index - 1, 2 * index - 1);
                     index = 2 * index;
                 }
                 else
                 {
-                    this.Swap(index - 1, 2 * index);
+                    Swap(index - 1, 2 * index);
                     index = 2 * index + 1;
                 }
             }

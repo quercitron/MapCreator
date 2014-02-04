@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-using Triangulation.Algorithm.GeometryBase;
+using GeneralAlgorithms.GeometryBase;
 
 namespace Triangulation
 {

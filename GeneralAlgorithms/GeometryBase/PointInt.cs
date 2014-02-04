@@ -1,6 +1,6 @@
-namespace Triangulation.Algorithm.GeometryBase
+namespace GeneralAlgorithms.GeometryBase
 {
-    class PointInt
+    public class PointInt
     {
         public PointInt(int x, int y)
         {

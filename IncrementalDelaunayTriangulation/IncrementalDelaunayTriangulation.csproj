@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FD60C489-C082-4ADB-920E-648804357EA5}</ProjectGuid>
+    <ProjectGuid>{1C22EE00-9968-49B4-B59F-3ACAC50EB80A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MapGenerator.Utils</RootNamespace>
-    <AssemblyName>MapGenerator.Utils</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <RootNamespace>IncrementalDelaunayTriangulation</RootNamespace>
+    <AssemblyName>IncrementalDelaunayTriangulation</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,11 +33,25 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MyColor.cs" />
+    <Compile Include="Edge.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ImageSaver.cs" />
+    <Compile Include="Structure.cs" />
+    <Compile Include="StructurePoint.cs" />
+    <Compile Include="Triangle.cs" />
+    <Compile Include="TriangleHash.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GeneralAlgorithms\GeneralAlgorithms.csproj">
+      <Project>{3a9a126d-2750-43b8-a66e-b56cd4b3415e}</Project>
+      <Name>GeneralAlgorithms</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

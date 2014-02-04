@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using GeneralAlgorithms.GeometryBase;
+using GeneralAlgorithms.PriorityQueue;
+
 using PerlinNoiseGeneration;
 
-using Triangulation.Algorithm.GeometryBase;
-using Triangulation.Algorithm.PriorityQueue;
 using Triangulation.MapObjects;
 
-namespace Triangulation.MapBuilding
+namespace Triangulation.MapBuilding.Elevation
 {
     internal class PerlinNoiseElevation : BaseElevationGenerator
     {

@@ -1,8 +1,6 @@
 using System;
 
-using Triangulation.Dividing;
-
-namespace Triangulation.Algorithm.GeometryBase
+namespace GeneralAlgorithms.GeometryBase
 {
     public static class Geometry
     {
@@ -21,11 +19,6 @@ namespace Triangulation.Algorithm.GeometryBase
         public static double Vect(Point2D a, Point2D b, Point2D c)
         {
             return (b.X - a.X) * (c.Y - a.Y) - (b.Y - a.Y) * (c.X - a.X);
-        }
-
-        public static double Vect(Edge edge, Point2D point)
-        {
-            return Vect(edge.First, edge.Second, point);
         }
 
         public static double Dist(Point2D a, Point2D b)

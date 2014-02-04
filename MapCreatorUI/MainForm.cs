@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+
+using GeneralAlgorithms.GeometryBase;
+
 using Triangulation;
-using Triangulation.Algorithm.GeometryBase;
 using Triangulation.MapPainter;
 
 namespace MapCreatorUI

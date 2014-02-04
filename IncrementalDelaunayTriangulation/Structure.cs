@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 
-using Triangulation.Algorithm.GeometryBase;
+using GeneralAlgorithms.GeometryBase;
 
-namespace Triangulation.Dividing
+namespace IncrementalDelaunayTriangulation
 {
     public class Structure
     {
@@ -182,7 +181,7 @@ namespace Triangulation.Dividing
                 {
                     Edge edge = triangle.Edge(i);
 
-                    if (Geometry.Vect(edge, triangle.Points[i]) * Geometry.Vect(edge, target) <= 0)
+                    if (Vect(edge, triangle.Points[i]) * Vect(edge, target) <= 0)
                     {
                         return triangle.Triangles[i];
                     }
@@ -219,8 +218,13 @@ namespace Triangulation.Dividing
 
         private void AddTriangle(Triangle triangle)
         {
-            triangle.Id = _triangles.Count();
+            triangle.Id = _triangles.Count;
             _triangles.Add(triangle);
+        }
+
+        private double Vect(Edge edge, Point2D point)
+        {
+            return Geometry.Vect(edge.First, edge.Second, point);
         }
     }
 }

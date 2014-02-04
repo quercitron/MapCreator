@@ -1,9 +1,10 @@
+using GeneralAlgorithms.GeometryBase;
+
 using PerlinNoiseGeneration;
 
-using Triangulation.Algorithm.GeometryBase;
 using Triangulation.MapObjects;
 
-namespace Triangulation.MapBuilding
+namespace Triangulation.MapBuilding.LandGenerators
 {
     internal class PerlinNoiseLandGenerator : IMapBuilderComponent
     {

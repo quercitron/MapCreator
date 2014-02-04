@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+
+using GeneralAlgorithms.GeometryBase;
+using GeneralAlgorithms.Sorting;
+
 using MapGenerator.Utils;
 using PerlinNoiseGeneration;
-using Triangulation.Algorithm.GeometryBase;
-using Triangulation.Algorithm.Sorting;
 
 namespace NoiseGeneratorTestApp
 {

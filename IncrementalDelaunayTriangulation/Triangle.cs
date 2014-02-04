@@ -1,12 +1,11 @@
 using System.Linq;
 
-using Triangulation.Algorithm.GeometryBase;
-using Triangulation.MapObjects;
+using GeneralAlgorithms.GeometryBase;
 
-namespace Triangulation.Dividing
+namespace IncrementalDelaunayTriangulation
 {
     public class Triangle
-    {        
+    {
         public StructurePoint[] Points { get; set; }
 
         public Triangle[] Triangles { get; set; }
@@ -17,8 +16,6 @@ namespace Triangulation.Dividing
         {
             return new Edge(Points[(i + 1) % 3], Points[(i + 2) % 3]);
         }
-
-        public Corner Corner { get; set; }
 
         public Point2D Center
         {

@@ -2,18 +2,20 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-using Triangulation.Algorithm.GeometryBase;
-using Triangulation.Algorithm.Sorting;
-using Triangulation.Dividing;
+using GeneralAlgorithms.GeometryBase;
+using GeneralAlgorithms.Sorting;
+
+using IncrementalDelaunayTriangulation;
+
 using Triangulation.MapObjects;
 
-namespace Triangulation.MapBuilding
+namespace Triangulation.MapBuilding.Polygons
 {
     internal class FormPolygons : IMapBuilderComponent
     {
         public FormPolygons(Structure structure, INoiseLineGenerator noiseLineGenerator)
         {
-            this.m_Structure = structure;
+            m_Structure = structure;
             m_NoiseLineGenerator = noiseLineGenerator;
         }
 
@@ -23,21 +25,56 @@ namespace Triangulation.MapBuilding
 
         public void Build(IMap map, MapSettings settings)
         {
-            foreach (StructurePoint point in m_Structure.Points)
+            var pointsDict = new Dictionary<StructurePoint, MapPoint>();
+            var trianglesDict = new Dictionary<Triangle, MapTriangle>();
+
+            var points = new List<MapPoint>();
+            foreach (var point in m_Structure.Points)
             {
-                var polygon = new Polygon(point);
-                point.Polygon = polygon;
+                var mapPoint = new MapPoint(point);
+                points.Add(mapPoint);
+
+                var polygon = new Polygon(mapPoint);
                 map.Polygons.Add(polygon);
+
+                mapPoint.Polygon = polygon;
+                pointsDict[point] = mapPoint;
             }
 
-            foreach (Triangle triangle in m_Structure.Triangles)
+            var triangles = new List<MapTriangle>();
+            foreach (var triangle in m_Structure.Triangles)
             {
+                var mapTriangle = new MapTriangle(triangle.Id);
+                triangles.Add(mapTriangle);
+
                 var corner = new Corner(triangle.Center);
-                triangle.Corner = corner;
                 map.Corners.Add(corner);
+
+                mapTriangle.Corner = corner;
+                trianglesDict[triangle] = mapTriangle;
             }
 
-            foreach (Triangle triangle in m_Structure.Triangles)
+            foreach (var triangle in m_Structure.Triangles)
+            {
+                var mapTriangle = trianglesDict[triangle];
+
+                for (int i = 0; i < 3; i++)
+                {
+                    var point = triangle.Points[i];
+                    if (point != null)
+                    {
+                        mapTriangle.Points[i] = pointsDict[point];
+                    }
+
+                    var neighborTriangle = triangle.Triangles[i];
+                    if (neighborTriangle != null)
+                    {
+                        mapTriangle.Triangles[i] = trianglesDict[neighborTriangle];
+                    }
+                }
+            }
+
+            foreach (var triangle in triangles)
             {
                 for (int i = 0; i < 3; i++)
                 {
@@ -47,8 +84,8 @@ namespace Triangulation.MapBuilding
 
                 for (int i = 0; i < 3; i++)
                 {
-                    Edge edge = triangle.Edge(i);
-                    Triangle current = triangle.Triangles[i];
+                    var edge = triangle.Edge(i);
+                    var current = triangle.Triangles[i];
 
                     if (current != null)
                     {
@@ -102,12 +139,12 @@ namespace Triangulation.MapBuilding
             {
                 foreach (var border in polygon.Borders.Where(b => !b.BorderToDrawCreated))
                 {
-                    var points = m_NoiseLineGenerator.Generate(border.Corners[0], border.Polygons[0].BasePoint,
+                    var borderPoints = m_NoiseLineGenerator.Generate(border.Corners[0], border.Polygons[0].BasePoint,
                                                              border.Corners[1], border.Polygons[1].BasePoint, 2, true);
                     /*var points = new List<Point2D> { border.Corners[0], border.Corners[1] };*/
                     /*border.Polygons[0].CornersToDraw.AddRange(points);
                     border.Polygons[1].CornersToDraw.AddRange(points);*/
-                    border.BorderToDraw = points;
+                    border.BorderToDraw = borderPoints;
                     border.BorderToDrawCreated = true;
                 }
             }
@@ -122,9 +159,9 @@ namespace Triangulation.MapBuilding
                     }
                     else
                     {
-                        var points = new List<Point2D>(border.BorderToDraw);
-                        points.Reverse();
-                        polygon.CornersToDraw.AddRange(points);
+                        var borderPoints = new List<Point2D>(border.BorderToDraw);
+                        borderPoints.Reverse();
+                        polygon.CornersToDraw.AddRange(borderPoints);
                     }
                 }
             }

@@ -1,7 +1,15 @@
-﻿using PerlinNoiseGeneration;
+﻿using IncrementalDelaunayTriangulation;
 
-using Triangulation.Dividing;
+using PerlinNoiseGeneration;
+
 using Triangulation.MapBuilding;
+using Triangulation.MapBuilding.Elevation;
+using Triangulation.MapBuilding.Lakes;
+using Triangulation.MapBuilding.LandGenerators;
+using Triangulation.MapBuilding.Moisture;
+using Triangulation.MapBuilding.Polygons;
+using Triangulation.MapBuilding.Rivers;
+using Triangulation.MapBuilding.TerranType;
 using Triangulation.MapObjects;
 
 namespace Triangulation

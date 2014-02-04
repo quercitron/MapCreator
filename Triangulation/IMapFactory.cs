@@ -1,4 +1,5 @@
-using Triangulation.Dividing;
+using IncrementalDelaunayTriangulation;
+
 using Triangulation.MapObjects;
 
 namespace Triangulation

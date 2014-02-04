@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
-using Triangulation.Dividing;
+
+using IncrementalDelaunayTriangulation;
+
 using Triangulation.MapBuilding;
 using Triangulation.MapObjects;
 

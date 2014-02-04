@@ -1,12 +1,12 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
-using Triangulation.Algorithm.GeometryBase;
-using Triangulation.Algorithm.PriorityQueue;
+using GeneralAlgorithms.GeometryBase;
+using GeneralAlgorithms.PriorityQueue;
+
 using Triangulation.MapObjects;
 
-namespace Triangulation.MapBuilding
+namespace Triangulation.MapBuilding.Moisture
 {
     internal class MoistureGenerator : IMapBuilderComponent
     {

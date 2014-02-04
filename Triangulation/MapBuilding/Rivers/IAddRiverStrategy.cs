@@ -1,6 +1,6 @@
 ﻿using Triangulation.MapObjects;
 
-namespace Triangulation.MapBuilding
+namespace Triangulation.MapBuilding.Rivers
 {
     internal interface IAddRiverStrategy
     {
