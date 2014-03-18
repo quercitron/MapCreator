@@ -1,9 +1,16 @@
 ﻿using System;
 
+using GeneralAlgorithms.RandomGenerator;
+
 namespace Triangulation
 {
-    public class RandomImproved : Random
+    public class RandomImproved : Random, IRandomGenerator
     {
+        public double NextDouble(double maxValue)
+        {
+            return NextDouble() * maxValue;
+        }
+
         public double NextDouble(double minValue, double maxValue)
         {
             if (minValue > maxValue)
@@ -11,7 +18,7 @@ namespace Triangulation
                 throw new ArgumentException("MinValue must be less or equal to MaxValue");
             }
 
-            return minValue + base.NextDouble() * (maxValue - minValue);
+            return minValue + NextDouble() * (maxValue - minValue);
         }
     }
 }
