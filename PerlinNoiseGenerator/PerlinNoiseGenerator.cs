@@ -1,72 +1,78 @@
-using System;
+﻿using System;
+
+using GeneralAlgorithms.RandomGenerator;
 
 namespace PerlinNoiseGeneration
 {
     public class PerlinNoiseGenerator : INoiseGenerator
-    {        
-        public virtual double[,] GenerateNoise(int width, int height, int seed, double frequency)
-        {            
-            var result = new double[width,height];            
+    {
+        private readonly INoiseComponentsGenerator _noiseComponentsGenerator;
 
-            double amplitude = 1;
+        private readonly IRandomGeneratorFactory _randomGeneratorFactory;
 
-            int numberOfOctaves = Math.Max((int) (Math.Log(Math.Max(width, height) / frequency) / Math.Log(2)), 2);
+        public PerlinNoiseGenerator(INoiseComponentsGenerator noiseComponentsGenerator, IRandomGeneratorFactory randomGeneratorFactory)
+        {
+            _noiseComponentsGenerator = noiseComponentsGenerator;
+            _randomGeneratorFactory = randomGeneratorFactory;
+        }
 
-            for (int i = 0; i < numberOfOctaves; i++)
+        public double[,] GenerateNoise(int width, int height, int seed, double baseFrequency, int count)
+        {
+            var result = new double[width,height];
+            var randomGenerator = _randomGeneratorFactory.CreatreGenerator(seed);
+
+            var noiseComponents = _noiseComponentsGenerator.GetComponents(baseFrequency, count);
+
+            foreach (var component in noiseComponents)
             {
-                amplitude /= 2;                
+                var freqX = 2.0 * width / (width + height) * component.Frequency;
+                var freqY = 2.0 * height / (width + height) * component.Frequency;
+
+                int n = (int)Math.Ceiling(freqX);
+                int m = (int)Math.Ceiling(freqY);
+
+                var abc = new double[n + 1,m + 1];
+                for (int i = 0; i < n + 1; i++)
+                {
+                    for (int j = 0; j < m + 1; j++)
+                    {
+                        abc[i, j] = randomGenerator.NextDouble() * component.Amplitude;
+                    }
+                }
 
                 for (int x = 0; x < width; x++)
                 {
                     for (int y = 0; y < height; y++)
                     {
-                        result[x, y] += InterpolatedNoise2D(x * frequency / width, y * frequency / height, seed) * amplitude;
+                        var aX = x * freqX / width;
+                        var i = (int)aX;
+                        var shiftX = aX - i;
+
+                        var aY = y * freqY / height;
+                        var j = (int)aY;
+                        var shiftY = aY - j;
+
+                        var val = (1 - shiftX) * (1 - shiftY) * abc[i, j]
+                                  + shiftX * (1 - shiftY) * abc[i + 1, j]
+                                  + (1 - shiftX) * shiftY * abc[i, j + 1]
+                                  + shiftX * shiftY * abc[i + 1, j + 1];
+                        // reflected, very funny
+                        /*var val = (1 - shiftX) * (1 - shiftY) * abc[i + 1, j + 1]
+                                  + shiftX * (1 - shiftY) * abc[i, j + 1]
+                                  + (1 - shiftX) * shiftY * abc[i + 1, j]
+                                  + shiftX * shiftY * abc[i, j];*/
+
+                        result[x, y] += val;
                     }
                 }
-
-                frequency *= 2;
             }
 
             return result;
         }
 
-        private static double Noise2D(int x, int y, int seed)
-        {
-            long n = x + (long)y * 57 + seed;
-            n = (n << 13) ^ n;
-            return (1.0 - ((n * (n * n * 15731 + 789221) + 1376312589) & 0x7fffffff) / 1073741824.0);
-        }
-
-        private static double Noise2DByRandomClass(int x, int y)
-        {
-            return new Random(x + 10000 * y).NextDouble();            
-        }
-
-        private static double InterpolatedNoise2D(double x, double y, int seed)
-        {
-            int integerX = (int) x;
-            double fractionalX = x - integerX;
-            int integerY = (int) y;
-            double fractionalY = y - integerY;
-
-            double v1 = SmoothedNoise2D(integerX, integerY, seed);
-            double v2 = SmoothedNoise2D(integerX + 1, integerY, seed);
-            double v3 = SmoothedNoise2D(integerX, integerY + 1, seed);
-            double v4 = SmoothedNoise2D(integerX + 1, integerY + 1, seed);
-
-            double i1 = InterpolateLinear(v1, v2, fractionalX);
-            double i2 = InterpolateLinear(v3, v4, fractionalX);
-            return InterpolateLinear(i1, i2, fractionalY);
-        }
-
         private static double InterpolateLinear(double a, double b, double x)
         {
             return a + (b - a) * x;
-        }
-
-        private static double SmoothedNoise2D(int x, int y, int seed)
-        {
-            return Math.Abs(Noise2D(x, y, seed));
         }
     }
 }

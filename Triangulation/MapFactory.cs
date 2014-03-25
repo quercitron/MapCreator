@@ -24,7 +24,7 @@ namespace Triangulation
 
             new CalculateDistanceFromEdgeBuilderComponent().Build(map, settings);
 
-            new PerlinNoiseLandGenerator(seed, new PerlinNoiseGenerator()).Build(map, settings);
+            new PerlinNoiseLandGenerator(seed, new PerlinNoiseGeneratorOld()).Build(map, settings);
 
             new DefineOcean().Build(map, settings);
 
@@ -32,7 +32,7 @@ namespace Triangulation
 
             new StructureLakes().Build(map, settings);
 
-            new PerlinNoiseElevation(new PerlinNoiseGenerator()).Build(map, settings);
+            new PerlinNoiseElevation(new PerlinNoiseGeneratorOld()).Build(map, settings);
             //new DistanceFromWaterElevation(new PerlinNoiseGenerator()).Build(map, settings);
 
             new AddRiversBuilderComponent(new CommonAddRiverStrategy()).Build(map, settings);

@@ -14,7 +14,7 @@ namespace Triangulation.MapBuilding.LandGenerators
 
         private readonly int NoiseFrequency = 8;
 
-        public PerlinNoiseLandGenerator(int seed, PerlinNoiseGenerator perlinNoiseGenerator)
+        public PerlinNoiseLandGenerator(int seed, PerlinNoiseGeneratorOld perlinNoiseGenerator)
         {
             this.m_PerlinNoiseGenerator = perlinNoiseGenerator;
             this.Seed = seed;
@@ -22,7 +22,7 @@ namespace Triangulation.MapBuilding.LandGenerators
 
         public int Seed { get; set; }
 
-        private readonly PerlinNoiseGenerator m_PerlinNoiseGenerator;
+        private readonly PerlinNoiseGeneratorOld m_PerlinNoiseGenerator;
 
         public void Build(IMap map, MapSettings settings)
         {

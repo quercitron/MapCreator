@@ -7,9 +7,9 @@
         {
         }
 
-        public override double[,] GenerateNoise(int width, int height, int seed, double frequency)
+        public override double[,] GenerateNoise(int width, int height, int seed, double baseFrequency, int count)
         {
-            var result = base.GenerateNoise(width, height, seed, frequency);
+            var result = base.GenerateNoise(width, height, seed, baseFrequency, count);
 
             Polarize(result);
 

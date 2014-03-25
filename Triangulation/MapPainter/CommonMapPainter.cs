@@ -14,7 +14,7 @@ namespace Triangulation.MapPainter
 
         // TODO: Change palette technic
         private readonly Palette m_Palette = new Palette();
-        private readonly PerlinNoiseGenerator m_PerlinNoiseGenerator = new PerlinNoiseGenerator();
+        private readonly PerlinNoiseGeneratorOld m_PerlinNoiseGenerator = new PerlinNoiseGeneratorOld();
         private readonly Random m_Random = new Random();
 
         public Bitmap DrawMap(IMap map, DrawSettings settings)

@@ -1,6 +1,6 @@
 using System;
 
-namespace GeneralAlgorithms.RandomGenerator
+namespace GeneralAlgorithms.RandomGenerator.DefaultGenerator
 {
     class DefaultRandomGenerator : BaseRandomGenerator
     {
@@ -9,6 +9,11 @@ namespace GeneralAlgorithms.RandomGenerator
         public DefaultRandomGenerator()
         {
             m_DefaultBaseGenerator = new Random();
+        }
+
+        public DefaultRandomGenerator(int seed)
+        {
+            m_DefaultBaseGenerator = new Random(seed);
         }
 
         public override int Next()

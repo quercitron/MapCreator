@@ -9,9 +9,9 @@ namespace PerlinNoiseGeneration
 
         private readonly INoiseGenerator m_Generator;
 
-        public virtual double[,] GenerateNoise(int width, int height, int seed, double frequency)
+        public virtual double[,] GenerateNoise(int width, int height, int seed, double baseFrequency, int count)
         {
-            return m_Generator.GenerateNoise(width, height, seed, frequency);
+            return m_Generator.GenerateNoise(width, height, seed, baseFrequency, count);
         }
     }
 }

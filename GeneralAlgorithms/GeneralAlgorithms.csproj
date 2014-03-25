@@ -46,10 +46,14 @@
     <Compile Include="PriorityQueue\IPriorityQueue.cs" />
     <Compile Include="PriorityQueue\PriorityQueue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RandomGenerator\DefaultRandomGenerator.cs" />
-    <Compile Include="RandomGenerator\IRandom.cs" />
-    <Compile Include="RandomGenerator\MersenneTwister.cs" />
+    <Compile Include="RandomGenerator\DefaultGenerator\DefaultRandomGenerator.cs" />
+    <Compile Include="RandomGenerator\DefaultGenerator\DefaultRandomGeneratorFactory.cs" />
+    <Compile Include="RandomGenerator\IRandomGenerator.cs" />
+    <Compile Include="RandomGenerator\MersenneTwisterGenerator\MersenneTwister.cs" />
+    <Compile Include="RandomGenerator\MersenneTwisterGenerator\MersenneTwisterRandomGenerator.cs" />
+    <Compile Include="RandomGenerator\MersenneTwisterGenerator\MersenneTwisterRandomGeneratorFactory.cs" />
     <Compile Include="RandomGenerator\RandomGenerator.cs" />
+    <Compile Include="RandomGenerator\IRandomGeneratorFactory.cs" />
     <Compile Include="Sorting\QuickSort.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

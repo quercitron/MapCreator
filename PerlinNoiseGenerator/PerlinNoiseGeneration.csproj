@@ -43,11 +43,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="INoiseGenerator.cs" />
+    <Compile Include="NoiseComponent.cs" />
+    <Compile Include="NoiseComponentsGenerator.cs" />
     <Compile Include="NoiseDecoration\NoiseDecorator.cs" />
     <Compile Include="NoiseDecoration\NormNoiseDecorator.cs" />
     <Compile Include="NoiseDecoration\SlowedHeightIncreaseNoiseDecorator.cs" />
     <Compile Include="PerlinNoiseGenerator.cs" />
+    <Compile Include="PerlinNoiseGeneratorOld.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StandardComponentGenerator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GeneralAlgorithms\GeneralAlgorithms.csproj">
+      <Project>{3A9A126D-2750-43B8-A66E-B56CD4B3415E}</Project>
+      <Name>GeneralAlgorithms</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

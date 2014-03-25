@@ -10,7 +10,7 @@ namespace Triangulation.MapBuilding.LandGenerators
 {
     class ImprovedPerlinNoiseLandGenerator : IMapBuilderComponent
     {
-        public ImprovedPerlinNoiseLandGenerator(int seed, PerlinNoiseGenerator perlinNoiseGenerator)
+        public ImprovedPerlinNoiseLandGenerator(int seed, PerlinNoiseGeneratorOld perlinNoiseGenerator)
         {
             this.m_PerlinNoiseGenerator = perlinNoiseGenerator;
             Seed = seed;
@@ -18,7 +18,7 @@ namespace Triangulation.MapBuilding.LandGenerators
 
         public int Seed { get; set; }
 
-        private readonly PerlinNoiseGenerator m_PerlinNoiseGenerator;
+        private readonly PerlinNoiseGeneratorOld m_PerlinNoiseGenerator;
 
         private readonly double m_Indent = 0.3;
 
